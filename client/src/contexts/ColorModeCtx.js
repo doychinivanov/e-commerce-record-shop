@@ -1,6 +1,6 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { createTheme, ThemeProvider } from "@mui/material";
-import { amber, grey, deepOrange } from '@mui/material/colors';
+import { orange, grey, deepOrange } from '@mui/material/colors';
 
 const ColorModeCtx = React.createContext();
 
@@ -14,8 +14,8 @@ export const ColorModeProvider = ({ children }) => {
           ...(mode === 'light'
             ? {
                 // palette values for light mode
-                primary: amber,
-                divider: amber[200],
+                primary: orange,
+                divider: orange[700],
                 text: {
                   primary: grey[900],
                   secondary: grey[800],
@@ -23,14 +23,14 @@ export const ColorModeProvider = ({ children }) => {
               }
             : {
                 // palette values for dark mode
-                primary: deepOrange,
-                divider: deepOrange[700],
+                primary: grey,
+                divider: grey[700],
                 background: {
-                  default: deepOrange[900],
-                  paper: deepOrange[900],
+                  primary: '#fff',
+                  secondary: grey[500],
                 },
                 text: {
-                  primary: '#fff',
+                  primary: '#f5f5f5',
                   secondary: grey[500],
                 },
               }),
