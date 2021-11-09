@@ -162,14 +162,14 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar>
 
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             MUI
-          </Typography>
+          </Typography> */}
 
           <Search>
             <SearchIconWrapper>
@@ -181,7 +181,16 @@ const NavBar = () => {
             />
           </Search>
 
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1 }}> 
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' }, textAlign:"center" }}
+          >
+            MUI
+          </Typography>
+          </Box>
           
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
