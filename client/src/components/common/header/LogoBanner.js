@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import AlbumIcon from '@mui/icons-material/Album';
 
 const LogoBanner = () => {
     return (
@@ -10,6 +11,7 @@ const LogoBanner = () => {
               component="div"
               sx={{ display: { xs: 'none', sm: 'block' }, textAlign: "center" }}
             >
+              <AlbumIcon />
               Vinyled
             </Typography>
           </Box>

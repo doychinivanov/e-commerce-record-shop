@@ -1,13 +1,13 @@
 import NavBar from './components/common/header/NavBar';
 import {ColorModeProvider} from './contexts/ColorModeCtx'
+import CatalogList from './components/catalog/CatalogList';
 
 function App() {
   return (
     <div className="App">
       <ColorModeProvider>
-      <header className="App-header">
         <NavBar/>
-      </header>
+        <CatalogList />
       </ColorModeProvider>
     </div>
   );
