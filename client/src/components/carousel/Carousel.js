@@ -35,7 +35,7 @@ const CarouselConveyer = (props) => {
 const CarouselItem = (props) => {
     return (
         <Paper style={{ 'textAlign': 'center'}}>
-            <img style={{}} src={props.item.description} alt="Album Cover" />
+            <img style={{maxHeight: 420}} src={props.item.description} alt="Album Cover" />
             <h2 style={{color: props.theme.palette.text.secondary}} >{props.item.name}</h2>
 
             <Button className="CheckButton">

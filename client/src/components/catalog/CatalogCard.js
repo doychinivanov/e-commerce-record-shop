@@ -7,10 +7,10 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 import styles from './CatalogCard.module.css';
 
-const CatalogCard = ({ item }) => {
+const CatalogCard = ({ item, theme }) => {
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={{backgroundColor: theme.palette.background.primary}}>
             <div className={styles.circle}>
 
             </div>
