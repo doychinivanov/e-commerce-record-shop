@@ -5,8 +5,6 @@ import { Paper, Button } from '@mui/material'
 const CarouselConveyer = (props) => {
     const {theme} = useColorMode();
 
-    console.log(theme.palette.primary)
-
     const items = [
         {
             name: "Billie-Eilish",
