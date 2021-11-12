@@ -16,9 +16,13 @@ export const ColorModeProvider = ({ children }) => {
                 // palette values for light mode
                 primary: orange,
                 divider: orange[700],
+                background: {
+                  primary: '#fff',
+                  secondary: orange[50],
+                },
                 text: {
                   primary: grey[900],
-                  secondary: grey[800],
+                  secondary: orange[500],
                 },
               }
             : {
@@ -26,12 +30,12 @@ export const ColorModeProvider = ({ children }) => {
                 primary: grey,
                 divider: grey[700],
                 background: {
-                  primary: '#fff',
+                  primary: '#1E1E1E',
                   secondary: grey[500],
                 },
                 text: {
                   primary: '#f5f5f5',
-                  secondary: grey[500],
+                  secondary: '#fff',
                 },
               }),
         },
@@ -50,7 +54,7 @@ export const ColorModeProvider = ({ children }) => {
     // Update the theme only if the mode changes
     const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-    const value = {colorMode}
+    const value = {colorMode, theme}
     return (
         <ColorModeCtx.Provider value={value}>
             <ThemeProvider theme={theme}>

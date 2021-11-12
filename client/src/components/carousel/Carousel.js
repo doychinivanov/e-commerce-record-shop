@@ -1,15 +1,19 @@
-// import React from 'react';
+import {useColorMode} from '../../contexts/ColorModeCtx'
 import Carousel from 'react-material-ui-carousel'
 import { Paper, Button } from '@mui/material'
 
-function Example(props){
+const CarouselConveyer = (props) => {
+    const {theme} = useColorMode();
+
+    console.log(theme.palette.primary)
+
     const items = [
         {
-            name: "Random Name #1",
+            name: "Billie-Eilish",
             description: "https://billieeilish.it/wp-content/uploads/2021/04/Billie-Eilish-Nuovo-Album.png"
         },
         {
-            name: "Random Name #2",
+            name: "Little-Simz",
             description: "https://trackblasters.com/wp-content/uploads/2021/09/Little-Simz-Sometimes-I-Might-Be-Introvert-Album-Stream_featured_image.jpg"
         },
         {
@@ -19,26 +23,28 @@ function Example(props){
     ]
 
     return (
-        <Carousel>
-            {
-                items.map( (item, i) => <Item key={i} item={item} /> )
-            }
-        </Carousel>
+        <div style={{marginTop: 64, textAlign: 'center', backgroundColor: theme.palette.background.primary}}>
+            <h1 style={{paddingTop: 15, paddingBottom: 10, color: theme.palette.text.secondary}}>New Releases</h1>
+            <Carousel fullHeightHover={false} animation="fade">
+                {
+                    items.map((item, i) => <CarouselItem key={i} item={item} theme={theme} />)
+                }
+            </Carousel>
+        </div>
     )
 }
 
-function Item(props)
-{
+const CarouselItem = (props) => {
     return (
-        <Paper style={{'textAlign': 'center'}}>
-            <h2>{props.item.name}</h2>
+        <Paper style={{ 'textAlign': 'center'}}>
             <img style={{}} src={props.item.description} alt="Album Cover" />
+            <h2 style={{color: props.theme.palette.text.secondary}} >{props.item.name}</h2>
 
-            {/* <Button className="CheckButton">
+            <Button className="CheckButton">
                 Check it out!
-            </Button> */}
+            </Button>
         </Paper>
     )
 }
 
-export default Example;
+export default CarouselConveyer;
