@@ -2,6 +2,8 @@ type Query {
     users: [User]
     user(id: ID!): User
     records: [Record]
+    recordsByOldestToNewest: [Record]
+    recordsByNewestToOldest: [Record]
     record(id: ID!): Record
 }
 
@@ -9,13 +11,15 @@ type User {
     _id: ID!
     fullName: String!
     email: String!
+    favorites: [Record]
     imageUrl: String!
 }
 
 type Record {
     _id: ID!
-    year: String!
+    year: Int!
     name: String!
+    label: String!
     creatorArtist: String!
     imageUrl: String!
 }

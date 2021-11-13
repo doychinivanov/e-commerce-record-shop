@@ -1,0 +1,23 @@
+[
+    {
+        "year": 1983,
+        "name": "Metal Health",
+        "creatorArtist": "Quiet Riot",
+        "label": "Pasha",
+        "imageUrl": ""
+    },
+    {
+        "year": 1987,
+        "name": "Appetite for Destruction",
+        "creatorArtist": "Guns & Roses",
+        "label": "Geffen Records",
+        "imageUrl": ""
+    },
+    {
+        "year": 1979,
+        "name": "The Wall",
+        "creatorArtist": "Pink Floyd",
+        "label": "Columbia Records",
+        "imageUrl": ""
+    }
+]

@@ -1,20 +1,15 @@
 [
     {
-        "year": "1983",
-        "name": "Metal Health",
-        "creatorArtist": "Quiet Riot",
+        "email": "doychinivanov@abv.bg",
+        "fullName": "Doychin Ivanov",
+        "favorites": [],
         "imageUrl": ""
     },
     {
-        "year": "1987",
-        "name": "Appetite for Destruction",
-        "creatorArtist": "Guns & Roses",
-        "imageUrl": ""
-    },
-    {
-        "year": "1979",
-        "name": "The Wall",
-        "creatorArtist": "Pink Floyd",
+        "email": "kuni98@abv.bg",
+        "fullName": "Kaloqn Ivanov",
+        "favorites": [],
         "imageUrl": ""
     }
+    
 ]

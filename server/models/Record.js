@@ -3,7 +3,7 @@ const { Schema, model } = pkg;
 
 const RecordSchema = new Schema({
     year: {
-        type: String,
+        type: Number,
         required: [true, 'Please enter a release date for this record!'],
         unique: true,
     },
@@ -14,6 +14,10 @@ const RecordSchema = new Schema({
     creatorArtist: {
         type: String,
         required: [true, 'Please enter valid name for album\'s creator!']
+    },
+    label: {
+        type: String,
+        required: [true, 'Please enter valid name for record label!']
     },
     imageUrl: {
         type: String,

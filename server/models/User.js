@@ -11,6 +11,11 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Please enter your full name!']
     },
+    favorites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Record',
+        default: []
+    }],
     imageUrl: {
         type: String,
         default: ''

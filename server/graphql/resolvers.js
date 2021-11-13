@@ -6,8 +6,13 @@ const resolvers = {
         users: async () => userService.getAllUsers(),
         user: async (_, {id}) =>  userService.getUserById(id),
         records: async () => recordService.getAllRecords(),
-        record: async(_, {id}) => recordService.getRecordById(id)
+        record: async(_, {id}) => recordService.getRecordById(id),
+        recordsByOldestToNewest: async() =>  recordService.getAllRecordsInDescByYear(),
+        recordsByNewestToOldest: async() => recordService.getAllRecordsInAscByYear(),
         
+    },
+    User: {
+        favorites: async (user) => (await user.populate('favorites')).favorites
     }
 }
 
