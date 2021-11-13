@@ -1,15 +1,16 @@
-import Recordchema from '../models/Record.js';
+import RecordSchema from '../models/Record.js';
 
 const getAllRecords = () => {
-    return Recordchema.find({});
+    return RecordSchema.find({});
+}
+
+const getRecordById = (recordId) => {
+    return RecordSchema.findById(recordId);
 }
 
 
 
 export default {
-    getAllRecords
-    // getUserById,
-    // getAllUsers,
-    // updateUser,
-    // getUserByEmail,
+    getAllRecords,
+    getRecordById
 };

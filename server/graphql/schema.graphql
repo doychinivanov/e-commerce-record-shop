@@ -2,6 +2,7 @@ type Query {
     users: [User]
     user(id: ID!): User
     records: [Record]
+    record(id: ID!): Record
 }
 
 type User {
