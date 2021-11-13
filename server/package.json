@@ -1,14 +1,15 @@
 {
-  "name": "server",
+  "name": "record-store-api",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "SET NODE_ENV=development && nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Doychin Ivanov",
   "license": "ISC",
   "dependencies": {
     "apollo-server-core": "^3.5.0",

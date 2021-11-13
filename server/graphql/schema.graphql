@@ -1,0 +1,20 @@
+type Query {
+    users: [User]
+    user(id: ID!): User
+    records: [Record]
+}
+
+type User {
+    _id: ID!
+    fullName: String!
+    email: String!
+    imageUrl: String!
+}
+
+type Record {
+    _id: ID!
+    year: String!
+    name: String!
+    creatorArtist: String!
+    imageUrl: String!
+}
