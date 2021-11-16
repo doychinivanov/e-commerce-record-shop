@@ -14,8 +14,6 @@ const CatalogList = () => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);
 
-    console.log(data);
-
 
     return (
         <div style={{ 'padding-top': 90, backgroundColor: theme.palette.background.primary }}>
