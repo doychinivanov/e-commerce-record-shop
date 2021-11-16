@@ -22,4 +22,5 @@ type Record {
     label: String!
     creatorArtist: String!
     imageUrl: String!
+    category: String!
 }

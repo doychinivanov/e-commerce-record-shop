@@ -23,6 +23,10 @@ const RecordSchema = new Schema({
         type: String,
         default: ''
     },
+    category: {
+        type: String,
+        required: [true, 'A category is required!']
+    }
 });
 
 export default model('Record', RecordSchema);

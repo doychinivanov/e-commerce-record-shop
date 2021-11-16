@@ -5,35 +5,40 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 
+import { Grid } from "@mui/material";
+
 import styles from './CatalogCard.module.css';
 
-const CatalogCard = ({ item, theme }) => {
+const CatalogCard = ({ theme, record }) => {
 
     return (
-        <div className={styles.container} style={{backgroundColor: theme.palette.background.primary}}>
-            <div className={styles.circle}>
+        <Grid item xs={2} sm={4} md={3}>
+
+            <div className={styles.container} style={{ backgroundColor: theme.palette.background.primary }}>
+                <div className={styles.circle}>
+
+                </div>
+
+                <img src={record.imageUrl} alt="Record cover" />
+
+                <div className={styles.info}>
+
+                    <div className={styles.icon}>
+                        <ShoppingCartOutlinedIcon />
+                    </div>
+
+                    <div className={styles.icon}>
+                        <SearchOutlinedIcon />
+                    </div>
+
+                    <div className={styles.icon}>
+                        <FavoriteBorderOutlinedIcon />
+                    </div>
+
+                </div>
 
             </div>
-
-            <img src={'https://img.discogs.com/Nob0UrVEbV5dWGhdQ03A4I02VJU=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-6251511-1488732908-9675.jpeg.jpg'} alt="Record cover"/>
-
-            <div className={styles.info}>
-
-                <div className={styles.icon}>
-                    <ShoppingCartOutlinedIcon />
-                </div>
-
-                <div className={styles.icon}>
-                    <SearchOutlinedIcon />
-                </div>
-
-                <div className={styles.icon}>
-                    <FavoriteBorderOutlinedIcon />
-                </div>
-
-            </div>
-
-        </div>
+        </Grid>
     );
 }
 

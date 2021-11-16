@@ -4,20 +4,23 @@
         "name": "Metal Health",
         "creatorArtist": "Quiet Riot",
         "label": "Pasha",
-        "imageUrl": ""
+        "imageUrl": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbettercallcreative.com%2Fwp-content%2Fuploads%2F2020%2F08%2Fmetal-health-543c38b71f003-768x768.jpg&f=1&nofb=1",
+        "category": "Hard Rock"
     },
     {
         "year": 1987,
         "name": "Appetite for Destruction",
         "creatorArtist": "Guns & Roses",
         "label": "Geffen Records",
-        "imageUrl": ""
+        "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.senscritique.com%2Fmedia%2F000004826898%2Fsource_big%2FAppetite_for_Destruction.jpg&f=1&nofb=1",
+        "category": "Hard Rock"
     },
     {
         "year": 1979,
         "name": "The Wall",
         "creatorArtist": "Pink Floyd",
         "label": "Columbia Records",
-        "imageUrl": ""
+        "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.scdn.co%2Fimage%2F61fbfc12c92752d2334547c00d5f13b8b7edba94&f=1&nofb=1",
+        "category": "Hard Rock"
     }
 ]
