@@ -18,7 +18,7 @@ export const ColorModeProvider = ({ children }) => {
                 divider: orange[700],
                 background: {
                   primary: '#fff',
-                  secondary: orange[50],
+                  secondary: orange[100],
                 },
                 text: {
                   primary: grey[900],
@@ -31,7 +31,7 @@ export const ColorModeProvider = ({ children }) => {
                 divider: grey[700],
                 background: {
                   primary: '#1E1E1E',
-                  secondary: grey[500],
+                  secondary: grey[900],
                 },
                 text: {
                   primary: '#f5f5f5',

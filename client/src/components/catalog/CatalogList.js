@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Grid, Container } from "@mui/material";
-import { Skeleton } from "@mui/material";
+import { Grid, Container, Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
@@ -16,7 +15,7 @@ const CatalogList = () => {
 
 
     return (
-        <div style={{ 'padding-top': 90, backgroundColor: theme.palette.background.primary }}>
+        <div style={{ 'padding-top': 90, 'padding-bottom': 90, backgroundColor: theme.palette.background.primary }}>
             <Container fixed>
                 <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
 

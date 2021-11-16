@@ -6,11 +6,16 @@ import { useColorMode } from '../../contexts/ColorModeCtx'
 const Filter = () => {
     const { theme } = useColorMode();
 
-    const [category, setCategory] = useState('');    
+    const [category, setCategory] = useState('all');
+    const [sortType, setSortType] = useState('');
 
     const handleChange = (event) => {
         setCategory(event.target.value);
-      };
+    };
+
+    const handleSortChange = (event) => {
+        setSortType(event.target.value);
+    };
 
     return (
         <div style={{ 'padding-top': 90, backgroundColor: theme.palette.background.primary }}>
@@ -26,6 +31,7 @@ const Filter = () => {
                             label="Category"
                             onChange={handleChange}
                         >
+                            <MenuItem value='all'>All</MenuItem>
                             <MenuItem value='pop'>Pop</MenuItem>
                             <MenuItem value="jazz">Jazz</MenuItem>
                             <MenuItem value="classical rock">Classical Rock</MenuItem>
@@ -37,7 +43,25 @@ const Filter = () => {
                         </Select>
                     </FormControl>
                 </Grid>
+
+                <Grid item xs={2} sm={4} md={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={sortType}
+                            label="Category"
+                            onChange={handleSortChange}
+                        >
+                            <MenuItem value='newest'>By Newest</MenuItem>
+                            <MenuItem value="oldest">By Oldest</MenuItem>
+
+                        </Select>
+                    </FormControl>
+                </Grid>
             </Grid>
+            
         </Container>
         </div>
     )
