@@ -1,10 +1,9 @@
-import {useColorMode} from '../../contexts/ColorModeCtx'
+import { height } from '@mui/system';
 import Carousel from 'react-material-ui-carousel'
 
 import CarouselItem from './CarouselItem';
 
-const CarouselConveyer = (props) => {
-    const {theme} = useColorMode();
+const CarouselConveyer = ({theme}) => {
 
     const items = [
         {
@@ -24,7 +23,15 @@ const CarouselConveyer = (props) => {
     return (
         <div style={{marginTop: 64, textAlign: 'center', backgroundColor: theme.palette.background.primary}}>
             <h1 style={{paddingTop: 15, paddingBottom: 10, color: theme.palette.text.secondary}}>New Releases</h1>
-            <Carousel fullHeightHover={false} animation="fade">
+            <Carousel
+            fullHeightHover={true}
+            animation="fade"
+            navButtonsProps={{
+                style: {
+                    borderRadius: 0,
+                }
+            }}
+            >
                 {
                     items.map((item, i) => <CarouselItem key={i} item={item} theme={theme} />)
                 }

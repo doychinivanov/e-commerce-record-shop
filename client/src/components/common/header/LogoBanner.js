@@ -6,7 +6,7 @@ const LogoBanner = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Typography
-              variant="h6"
+              variant="h5"
               noWrap
               component="div"
               sx={{ display: { xs: 'none', sm: 'block' }, textAlign: "center" }}

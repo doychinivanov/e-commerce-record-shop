@@ -3,13 +3,10 @@ import { Grid, Container, Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
-import { useColorMode } from '../../contexts/ColorModeCtx'
 
 import CatalogCard from "./CatalogCard";
 
-const CatalogList = () => {
-
-    const { theme } = useColorMode();
+const CatalogList = ({theme}) => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);
 
@@ -41,7 +38,7 @@ const CatalogList = () => {
                             </Grid>
                         </>
                         :
-                        data.records.map(record => <CatalogCard theme={theme} record={record} />)
+                        data.records.map(record => <CatalogCard key={record._id} theme={theme} record={record} />)
                     }
 
                     {/* {data.records.map(record => <CatalogCard theme={theme} record={record} />)} */}

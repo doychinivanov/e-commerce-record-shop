@@ -1,10 +1,8 @@
 import { Container, TextField, Typography, Box, Button, Grid } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
-import { useColorMode } from '../../contexts/ColorModeCtx'
+const Newsletter = ({theme}) => {
 
-const Newsletter = () => {
-    const { theme } = useColorMode();
     const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary;
 
     return (

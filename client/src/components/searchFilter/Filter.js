@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Grid, Container, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { useColorMode } from '../../contexts/ColorModeCtx'
 
 
-const Filter = () => {
-    const { theme } = useColorMode();
+const Filter = ({theme}) => {
 
     const [category, setCategory] = useState('all');
     const [sortType, setSortType] = useState('');
