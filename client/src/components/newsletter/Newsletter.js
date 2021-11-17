@@ -12,6 +12,7 @@ const Newsletter = ({theme}) => {
                     <Typography
                         variant="h2"
                         noWrap
+                        fontFamily="Ubuntu sans-serif"
                         component="div"
                         sx={{ display: { xs: 'block', sm: 'block' }, fontWeight: 'bold', textAlign: "center", mt: 5 }}
                     >
@@ -22,6 +23,7 @@ const Newsletter = ({theme}) => {
                         variant="h4"
                         noWrap
                         component="div"
+                        fontFamily="Ubuntu sans-serif"
                         sx={{ display: { xs: 'block', sm: 'block' }, mt: 4, textAlign: "center" }}
                     >
                         Get timely updates for your favorite products

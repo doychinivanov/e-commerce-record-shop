@@ -22,7 +22,9 @@ const CarouselConveyer = ({theme}) => {
 
     return (
         <div style={{marginTop: 64, textAlign: 'center', backgroundColor: theme.palette.background.primary}}>
-            <h1 style={{paddingTop: 15, paddingBottom: 10, color: theme.palette.text.secondary}}>New Releases</h1>
+            <h1 style={{paddingTop: 15, paddingBottom: 10, color: theme.palette.text.secondary}}>
+                <span style={{borderBottom: `1px solid ${theme.palette.text.secondary}`}}>New Releases</span>
+            </h1>
             <Carousel
             fullHeightHover={true}
             animation="fade"

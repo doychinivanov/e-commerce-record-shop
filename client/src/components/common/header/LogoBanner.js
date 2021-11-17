@@ -8,6 +8,7 @@ const LogoBanner = () => {
             <Typography
               variant="h5"
               noWrap
+              fontFamily="Ubuntu sans-serif"
               component="div"
               sx={{ display: { xs: 'none', sm: 'block' }, textAlign: "center" }}
             >
