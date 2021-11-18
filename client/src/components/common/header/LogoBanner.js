@@ -2,10 +2,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AlbumIcon from '@mui/icons-material/Album';
 
-const LogoBanner = () => {
+const LogoBanner = ({textColor}) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Typography
+              color={textColor}
               variant="h5"
               noWrap
               fontFamily="Ubuntu sans-serif"

@@ -10,7 +10,10 @@ import LogoBanner from './LogoBanner';
 import Navigation from './Navigation';
 import ThreeDotsButton from './ThreeDotsButton';
 
-const NavBar = () => {
+const NavBar = ({theme}) => {
+
+  const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -56,22 +59,23 @@ const NavBar = () => {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar position="fixed">
         <Toolbar>
-          <SearchBar />
+          <SearchBar textColor={textColor} />
 
-          <LogoBanner />
+          <LogoBanner textColor={textColor} />
 
-          <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} />
+          <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} textColor={textColor}/>
 
-          <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} />
+          <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} textColor={textColor}/>
         </Toolbar>
       </AppBar>
 
       {renderMobileMenu}
       {renderMenu}
     </Box>
+
   );
 }
 
