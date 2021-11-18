@@ -3,6 +3,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { Link } from 'react-router-dom';
 
 
 import { Grid } from "@mui/material";
@@ -27,9 +28,11 @@ const CatalogCard = ({ theme, record }) => {
                         <ShoppingCartOutlinedIcon />
                     </div>
 
-                    <div className={styles.icon}>
-                        <SearchOutlinedIcon />
-                    </div>
+                    <Link to={`/products/${record._id}`}>
+                        <div className={styles.icon}>
+                            <SearchOutlinedIcon />
+                        </div>
+                    </Link>
 
                     <div className={styles.icon}>
                         <FavoriteBorderOutlinedIcon />
