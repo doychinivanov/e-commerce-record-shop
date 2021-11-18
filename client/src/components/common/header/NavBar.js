@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { makeStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +14,22 @@ import ThreeDotsButton from './ThreeDotsButton';
 const NavBar = ({theme}) => {
 
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
+
+  const useStyles = makeStyles({
+    myComponent: {
+      "& .MuiIconButton-root": {
+        color: textColor
+      },
+      "& .MuiInputBase-root": {
+        color: textColor
+      },
+      "& .MuiSvgIcon-root": {
+        color: textColor
+      },
+    }
+  });
+
+  const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -62,13 +79,13 @@ const NavBar = ({theme}) => {
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="fixed">
         <Toolbar>
-          <SearchBar textColor={textColor} />
+          <SearchBar classes={classes} />
 
           <LogoBanner textColor={textColor} />
 
-          <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} textColor={textColor}/>
+          <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes}/>
 
-          <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} textColor={textColor}/>
+          <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes}/>
         </Toolbar>
       </AppBar>
 

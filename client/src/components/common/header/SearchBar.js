@@ -1,6 +1,5 @@
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { makeStyles } from '@mui/styles';
 import { styled, alpha } from '@mui/material/styles';
 
 const Search = styled('div')(({ theme }) => ({
@@ -43,20 +42,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({textColor}) => {
-
-  const useStyles = makeStyles({
-    myComponent: {
-      "& .MuiInputBase-root": {
-        color: textColor
-      },
-      "& .MuiSvgIcon-root": {
-        color: textColor
-      },
-    }
-  });
-
-  const classes = useStyles();
+const SearchBar = ({classes}) => {
 
   return (
     <div className={classes.myComponent}>

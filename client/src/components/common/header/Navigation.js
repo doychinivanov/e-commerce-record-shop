@@ -5,20 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
 
-
-const Navigation = ({ menuId, handleProfileMenuOpen, textColor }) => {
-
-  const useStyles = makeStyles({
-    myComponent: {
-      "& .MuiIconButton-root": {
-        color: textColor
-      }
-    }
-  });
-
-  const classes = useStyles();
+const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

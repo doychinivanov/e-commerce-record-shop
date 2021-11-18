@@ -1,0 +1,33 @@
+.payment-methods {
+    width: 50%;
+    height: 10%;
+    margin-top: 7px;
+}
+
+.contact-info {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info span {
+    margin-left: 3px;
+}
+
+.contact-info .email {
+    margin-left: 5px;
+}
+
+.social-icon {
+    margin-right: 10px;
+}
+
+ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+li {
+    width: 50%;
+  margin-bottom: 10px;
+}
