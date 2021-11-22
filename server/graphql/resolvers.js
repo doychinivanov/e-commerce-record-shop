@@ -12,6 +12,11 @@ const resolvers = {
         recordsByNewestToOldest: async() => recordService.getAllRecordsInAscByYear(),
         newsletterEmails: async() => newsletterService.getAllEmailsThatRequestedNewsletter(),
     },
+    Mutation: {
+        createNewsletterEmail: (_, {email}) => {
+            return newsletterService.addEmailForNewsletter(email);
+        }
+    },
     User: {
         favorites: async (user) => (await user.populate('favorites')).favorites
     }

@@ -1,9 +1,37 @@
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import { Container, TextField, Typography, Box, Button, Grid } from "@mui/material";
+import { toast } from 'react-toastify';
 import SendIcon from '@mui/icons-material/Send';
 
-const Newsletter = ({theme}) => {
+import { ADD_EMAIL_FOR_NEWSLETTER } from '../../graphql/mutations';
+
+const Newsletter = ({ theme }) => {
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [email, setEmail] = useState('');
+    const [mutateFunction, { error }] = useMutation(ADD_EMAIL_FOR_NEWSLETTER);
 
     const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary;
+
+    if (error) {
+        toast.error(error.message);
+    }
+
+    const submitEmail = () => {
+        if (email.trim() === '') {
+            return toast.error('Please enter a valid email!')
+        }
+
+        setIsDisabled(true);
+        mutateFunction({ variables: { email } })
+        .then(response => {
+            toast.success('Thank you! We recieved your email.');
+        })
+        .finally(() => {
+            setEmail('');
+            setIsDisabled(false)
+        });
+    }
 
     return (
         <div style={{ backgroundColor: theme.palette.background.secondary, color: textColor, paddingTop: 10, borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>
@@ -32,11 +60,11 @@ const Newsletter = ({theme}) => {
                     <Box pb={10}>
                         <Grid container spacing={2} alignItems="center" justifyContent="center">
                             <Grid item xs={8}>
-                                <TextField fullWidth margin="normal" label="Enter Your Email" variant="standard" />
+                                <TextField disabled={isDisabled} value={email} onChange={(ev) => setEmail(ev.target.value)} fullWidth margin="normal" label="Enter Your Email" variant="standard" />
                             </Grid>
 
                             <Grid item xs={2}>
-                                <Button variant="outlined">
+                                <Button disabled={isDisabled} onClick={submitEmail} variant="outlined">
                                     <SendIcon />
                                 </Button>
                             </Grid>

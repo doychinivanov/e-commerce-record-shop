@@ -8,6 +8,10 @@ type Query {
     newsletterEmails: [NewsletterEmail]
 }
 
+type Mutation {
+    createNewsletterEmail(email: String!): NewsletterEmail!
+}
+
 type User {
     _id: ID!
     fullName: String!

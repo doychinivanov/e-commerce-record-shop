@@ -1,7 +1,7 @@
 import NewsletterEmailSchema from '../models/NewsletterEmail.js';
 
 const addEmailForNewsletter = (newEmail) => {
-    return NewsletterEmailSchema.create(newEmail);
+    return NewsletterEmailSchema.create({email:newEmail});
 }
 
 const getAllEmailsThatRequestedNewsletter = () => {

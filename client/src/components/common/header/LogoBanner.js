@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const LogoBanner = ({ textColor }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Link to="/">
         <Typography
           color={textColor}
           variant="h5"
@@ -15,10 +14,11 @@ const LogoBanner = ({ textColor }) => {
           component="div"
           sx={{ display: { xs: 'none', sm: 'block' }, textAlign: "center" }}
         >
+      <Link to="/">
           <AlbumIcon />
           Vinyled
-        </Typography>
       </Link>
+        </Typography>
     </Box>
   )
 }
