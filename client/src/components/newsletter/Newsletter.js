@@ -19,7 +19,7 @@ const Newsletter = ({ theme }) => {
     }
 
     const submitEmail = () => {
-        if (email.trim() === '' || !emailPattern.test(email)) {
+        if (email.trim() === '' || !emailPattern.test(email.trim())) {
             return toast.error('Please enter a valid email!')
         }
 
