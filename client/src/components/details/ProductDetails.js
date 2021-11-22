@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { toast } from 'react-toastify';
 import { GET_PRODUCT_INFO_FOR_DETAILS } from '../../graphql/queries';
 
 import { Grid, Container, Box } from "@mui/material";
@@ -12,7 +13,7 @@ const ProductDetails = ({ id, theme }) => {
     const { loading, error, data } = useQuery(GET_PRODUCT_INFO_FOR_DETAILS, { variables: { recordId: id } });
 
     if (error) {
-        alert(error.message);
+        toast.error(error.message);
     }
 
     return (
@@ -20,7 +21,7 @@ const ProductDetails = ({ id, theme }) => {
             <Container fixed>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} columns={{ xs: 4, sm: 4, md: 8 }} alignItems="center">
-                        {loading
+                        {loading || error
                             ?
                             <ProductDetailsLoading />
                             :
