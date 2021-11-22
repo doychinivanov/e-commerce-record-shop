@@ -24,6 +24,8 @@ type Record {
     creatorArtist: String!
     imageUrl: String!
     category: String!
+    price: Int!,
+    description: String!
 }
 
 type NewsletterEmail {

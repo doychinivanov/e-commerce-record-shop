@@ -11,8 +11,8 @@ const ProductPage = () => {
     return (
         <>
             <NavBar theme={theme}/>
-            <div style={{ 'padding-top': 90, 'padding-bottom': 90,}}>
-                <ProductDetails id={id} />
+            <div style={{ 'paddingTop': 50, 'paddingBottom': 15}}>
+                <ProductDetails id={id} theme={theme} />
             </div>
             <Footer theme={theme}/>
         </>

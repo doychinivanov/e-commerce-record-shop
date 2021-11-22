@@ -16,7 +16,10 @@ export const GET_PRODUCT_INFO_FOR_DETAILS = gql`
         record(id: $recordId) {
             name
             category
-            creatorArtist
+            creatorArtist,
+            price,
+            imageUrl,
+            description
         }
     }
 `; 

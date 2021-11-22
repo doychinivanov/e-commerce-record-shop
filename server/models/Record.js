@@ -26,7 +26,17 @@ const RecordSchema = new Schema({
     category: {
         type: String,
         required: [true, 'A category is required!']
-    }
+    },
+    price: {
+        type: Number,
+        required: [true, 'Please enter valid record price!']
+    },
+    description: {
+        type: String,
+        required: [true, 'A description is required!'],
+        minlength: [20, 'The description must be at lease 20 characters!'],
+        maxlength: [800, 'The description must not exceed 800 characters!']
+    },
 });
 
 export default model('Record', RecordSchema);

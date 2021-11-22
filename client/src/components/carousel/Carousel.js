@@ -1,4 +1,4 @@
-import { height } from '@mui/system';
+// import { height } from '@mui/system';
 import Carousel from 'react-material-ui-carousel'
 
 import CarouselItem from './CarouselItem';

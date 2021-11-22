@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Container, Typography, Box, Button, Grid } from "@mui/material";
+import { Container, Box, Grid } from "@mui/material";
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';

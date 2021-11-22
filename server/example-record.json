@@ -5,7 +5,9 @@
         "creatorArtist": "Quiet Riot",
         "label": "Pasha",
         "imageUrl": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbettercallcreative.com%2Fwp-content%2Fuploads%2F2020%2F08%2Fmetal-health-543c38b71f003-768x768.jpg&f=1&nofb=1",
-        "category": "Hard Rock"
+        "category": "Hard Rock",
+        "price": 32,
+        "description": "Metal Health is the third studio album by the American heavy metal band Quiet Riot. It was released on March 11, 1983, the album spawned the bands signature songs the No. 5 hit \"Cum On Feel the Noize\" and the No. 31 hit \"Metal Health\".n Metal Health is the first ever heavy metal album to reach the top spot on the Billboard 200, replacing the Police's Synchronicity at number one in November 1983, because of that placement, it has been called the start of the hair metal era.\n The album went on to sell more than ten million copies worldwide"
     },
     {
         "year": 1987,
@@ -13,7 +15,9 @@
         "creatorArtist": "Guns & Roses",
         "label": "Geffen Records",
         "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.senscritique.com%2Fmedia%2F000004826898%2Fsource_big%2FAppetite_for_Destruction.jpg&f=1&nofb=1",
-        "category": "Hard Rock"
+        "category": "Hard Rock",
+        "price": 28,
+        "description": "The album was released to little mainstream attention in 1987. It was not until the following year that it became a massive commercial success, after the band had toured and received airplay with the singles \"Welcome to the Jungle\", \"Paradise City\" and \"Sweet Child o' Mine\". It topped the Billboard 200 and became the best-selling debut album of all time, as well as the seventh best-selling album of all time in the United States. With over 30 million copies sold worldwide, it is also one of the best-selling records of all time. Although critics were originally ambivalent toward the album, Appetite for Destruction has since received retrospective acclaim and been viewed as one of the greatest albums of all time. In 2018, it was re-released as a remastered box set to similar acclaim."
     },
     {
         "year": 1979,
@@ -21,6 +25,8 @@
         "creatorArtist": "Pink Floyd",
         "label": "Columbia Records",
         "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.scdn.co%2Fimage%2F61fbfc12c92752d2334547c00d5f13b8b7edba94&f=1&nofb=1",
-        "category": "Hard Rock"
+        "category": "Hard Rock",
+        "price": 42,
+        "description": "The Wall is the eleventh studio album by the English rock band Pink Floyd, released on 30 November 1979 by Harvest and Columbia Records. It is a rock opera that explores Pink, a jaded rock star whose eventual self-imposed isolation from society forms a figurative wall. The album was a commercial success, topping the US charts for 15 weeks and reaching number three in the UK. It initially received mixed reviews from critics, many of whom found it overblown and pretentious, but later received accolades as one of the greatest albums of all time and one of the band's finest works."
     }
 ]

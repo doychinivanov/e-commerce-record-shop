@@ -41,9 +41,6 @@ const CatalogList = ({theme}) => {
                         data.records.map(record => <CatalogCard key={record._id} theme={theme} record={record} />)
                     }
 
-                    {/* {data.records.map(record => <CatalogCard theme={theme} record={record} />)} */}
-
-
                 </Grid >
             </Container>
         </div>
