@@ -1,6 +1,5 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import ThemeSwitcher from './ThemeSwitcher';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -13,7 +12,7 @@ const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
 
 
       <div className={classes.myComponent}>
-        <ThemeSwitcher />
+
         <IconButton size="large" aria-label="show 4 new mails">
           <Badge>
             <FavoriteBorderIcon />

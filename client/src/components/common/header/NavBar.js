@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import ThemeSwitcher from './ThemeSwitcher';
 
 import SearchBar from './SearchBar';
 import MobileDropDown from './MobileDropDown';
@@ -10,8 +11,10 @@ import DesktopDropDown from './DesktopDropDown';
 import LogoBanner from './LogoBanner';
 import Navigation from './Navigation';
 import ThreeDotsButton from './ThreeDotsButton';
+import SignButton from './SignButton';
+import AuthModal from '../../modals/AuthModal';
 
-const NavBar = ({theme}) => {
+const NavBar = ({ theme }) => {
 
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
@@ -33,6 +36,10 @@ const NavBar = ({theme}) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -76,23 +83,32 @@ const NavBar = ({theme}) => {
   );
 
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position="fixed">
-        <Toolbar>
-          <SearchBar classes={classes} />
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed">
+          <Toolbar>
+            <SearchBar classes={classes} />
 
-          <LogoBanner textColor={textColor} />
+            <LogoBanner textColor={textColor} />
+            
+            <span className={classes.myComponent}>
+              <ThemeSwitcher />
+            </span>
 
-          <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes}/>
+            <SignButton handleOpen={handleOpen} theme={theme} textColor={textColor} />
 
-          <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes}/>
-        </Toolbar>
-      </AppBar>
+            {/* <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes}/> */}
 
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+            <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes} />
+          </Toolbar>
+        </AppBar>
 
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+
+      <AuthModal open={open} handleClose={handleClose} theme={theme} />
+    </>
   );
 }
 

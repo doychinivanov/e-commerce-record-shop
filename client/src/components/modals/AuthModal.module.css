@@ -1,0 +1,15 @@
+.form-navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in{
+    margin-right: 8px;
+    padding-right: 8px;
+    border-right: 1px solid #fff;
+    cursor: pointer;
+}
+
+.sign-up {
+    cursor: pointer;
+}
