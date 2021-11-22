@@ -11,6 +11,7 @@ const Newsletter = ({ theme }) => {
     const [email, setEmail] = useState('');
     const [mutateFunction, { error }] = useMutation(ADD_EMAIL_FOR_NEWSLETTER);
 
+    const emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary;
 
     if (error) {
@@ -18,7 +19,7 @@ const Newsletter = ({ theme }) => {
     }
 
     const submitEmail = () => {
-        if (email.trim() === '') {
+        if (email.trim() === '' || !emailPattern.test(email)) {
             return toast.error('Please enter a valid email!')
         }
 
