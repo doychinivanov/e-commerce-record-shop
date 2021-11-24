@@ -37,18 +37,20 @@ const RegisterForm = ({ closeModal, classes }) => {
         setWrongRePass(false);
     }
 
-    const submitRegisterForm = () => {
-
-        resetErrors();
+    const allFieldsAreValid = () => {
 
         if (!email || !validateEmail(email)) {
             setWrongEmail(true);
-            return toast.error('Please, enter a valid email')
+            toast.error('Please, enter a valid email');
+
+            return false;
         }
 
         if (!name || !validateName(name)) {
             setWrongName(true);
-            return toast.error('A name cannot be less than 3 symbols. Only English letters are allowed.')
+            toast.error('A name cannot be less than 3 symbols. Only English letters are allowed.')
+
+            return false;
         }
 
         if (!password || !validatePassword(password)) {
@@ -56,14 +58,26 @@ const RegisterForm = ({ closeModal, classes }) => {
             setWrongRePass(true);
             toast.error('Password must be at least 8 characters.');
             toast.error('Containing at least one number and one special char.');
-            return;
+
+            return false;
         }
 
         if (!password || password !== rePass) {
             setWrongPassowrd(true);
             setWrongRePass(true);
-            return toast.error('Passwords don\'t match.')
+            toast.error('Passwords don\'t match.');
+
+            return false;
         }
+
+        return true;
+    }
+
+    const submitRegisterForm = () => {
+
+        resetErrors();
+
+        if (!allFieldsAreValid()) return;
 
         setIsLoading(true);
         const loadingToastID = toast.loading("Please wait...");
@@ -79,7 +93,10 @@ const RegisterForm = ({ closeModal, classes }) => {
                         toast.update(loadingToastID, { render: "Welcome to Vinyled.", type: "success", isLoading: false, autoClose: 5000 });
                         closeModal();
                     });
-            }).catch((err) => toast.error(err.message));
+            }).catch((err) => {
+                setIsLoading(false);
+                toast.update(loadingToastID, { render: err.message, type: "error", isLoading: false, autoClose: 5000 });
+            });
     }
 
     return (
