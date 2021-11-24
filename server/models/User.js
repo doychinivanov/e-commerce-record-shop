@@ -20,6 +20,11 @@ const UserSchema = new Schema({
         type: String,
         default: ''
     },
+    cart: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Record',
+        default: []
+    }]
 });
 
 export default model('User', UserSchema);

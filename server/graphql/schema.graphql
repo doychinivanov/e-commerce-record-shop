@@ -10,6 +10,7 @@ type Query {
 
 type Mutation {
     createNewsletterEmail(email: String!): NewsletterEmail!
+    createRegularUser(email: String!, fullName: String!): User!
 }
 
 type User {
@@ -18,6 +19,7 @@ type User {
     email: String!
     favorites: [Record]
     imageUrl: String!
+    cart: [Record]
 }
 
 type Record {

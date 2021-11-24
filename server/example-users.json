@@ -3,12 +3,14 @@
         "email": "doychinivanov@abv.bg",
         "fullName": "Doychin Ivanov",
         "favorites": [],
+        "cart": [],
         "imageUrl": ""
     },
     {
         "email": "kuni98@abv.bg",
         "fullName": "Kaloqn Ivanov",
         "favorites": [],
+        "cart": [],
         "imageUrl": ""
     }
     

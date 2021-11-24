@@ -15,6 +15,9 @@ const resolvers = {
     Mutation: {
         createNewsletterEmail: (_, {email}) => {
             return newsletterService.addEmailForNewsletter(email);
+        },
+        createRegularUser: (_, {email, fullName}) => {
+            return userService.createUser({email, fullName});
         }
     },
     User: {
