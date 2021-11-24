@@ -4,14 +4,15 @@ import { Container, TextField, Typography, Box, Button, Grid } from "@mui/materi
 import { toast } from 'react-toastify';
 import SendIcon from '@mui/icons-material/Send';
 
+import { validateEmail } from '../../utils/emailValidation';
 import { ADD_EMAIL_FOR_NEWSLETTER } from '../../graphql/mutations';
 
 const Newsletter = ({ theme }) => {
     const [isDisabled, setIsDisabled] = useState(false);
+    const [emailIsWrong, setEmailIsWrong] = useState(false);
     const [email, setEmail] = useState('');
     const [mutateFunction, { error }] = useMutation(ADD_EMAIL_FOR_NEWSLETTER);
 
-    const emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary;
 
     if (error) {
@@ -19,7 +20,8 @@ const Newsletter = ({ theme }) => {
     }
 
     const submitEmail = () => {
-        if (email.trim() === '' || !emailPattern.test(email.trim())) {
+        if (email.trim() === '' || !validateEmail(email)) {
+            setEmailIsWrong(true);
             return toast.error('Please enter a valid email!')
         }
 
@@ -61,11 +63,11 @@ const Newsletter = ({ theme }) => {
                     <Box pb={10}>
                         <Grid container spacing={2} alignItems="center" justifyContent="center">
                             <Grid item xs={8}>
-                                <TextField disabled={isDisabled} value={email} onChange={(ev) => setEmail(ev.target.value)} fullWidth margin="normal" label="Enter Your Email" variant="standard" />
+                                <TextField error={emailIsWrong} disabled={isDisabled} value={email} onChange={(ev) => setEmail(ev.target.value)} fullWidth margin="normal" label="Enter Your Email" variant="standard" />
                             </Grid>
 
                             <Grid item xs={2}>
-                                <Button disabled={isDisabled} onClick={submitEmail} variant="outlined">
+                                <Button color={emailIsWrong ? "error": "inherit"} disabled={isDisabled} onClick={submitEmail} variant="outlined">
                                     <SendIcon />
                                 </Button>
                             </Grid>
