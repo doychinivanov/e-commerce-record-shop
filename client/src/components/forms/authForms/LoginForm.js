@@ -1,6 +1,11 @@
-import { FormControl, InputLabel, Input } from '@mui/material';
+import { FormControl, InputLabel, Input, Button } from '@mui/material';
 
-const LoginForm = ({ children, textColor, classes }) => {
+const LoginForm = ({ closeModal, classes }) => {
+
+    const submitLoginForm = () =>{
+        console.log('hey');
+        closeModal();
+    }
 
     return (
         <>
@@ -19,7 +24,11 @@ const LoginForm = ({ children, textColor, classes }) => {
                     </FormControl>
                 </span>
 
-                {children}
+                <Button onClick={submitLoginForm} sx={{ mt: 5 }}>
+                    <span style={{ color: '#f5f5f5' }}>
+                        Sign Up
+                    </span>
+                </Button>
             </FormControl>
 
         </>

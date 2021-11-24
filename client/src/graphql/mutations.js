@@ -7,3 +7,19 @@ export const ADD_EMAIL_FOR_NEWSLETTER = gql`
         }
     } 
 `;
+
+export const CREATE_REGULAR_USER = gql`
+    mutation CreateRegularUser($email: String!, $fullName: String!) {
+        createRegularUser(email: $email, fullName: $fullName) {
+            email
+            fullName
+            imageUrl
+            favorites {
+                _id
+            }
+            cart {
+                _id
+            }
+        }
+    }
+`;

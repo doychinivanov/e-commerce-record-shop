@@ -4,13 +4,14 @@ import { Container, TextField, Typography, Box, Button, Grid } from "@mui/materi
 import { toast } from 'react-toastify';
 import SendIcon from '@mui/icons-material/Send';
 
-import { validateEmail } from '../../utils/emailValidation';
+import { validateEmail } from '../../utils/inputValidation';
 import { ADD_EMAIL_FOR_NEWSLETTER } from '../../graphql/mutations';
 
 const Newsletter = ({ theme }) => {
     const [isDisabled, setIsDisabled] = useState(false);
     const [emailIsWrong, setEmailIsWrong] = useState(false);
     const [email, setEmail] = useState('');
+    
     const [mutateFunction, { error }] = useMutation(ADD_EMAIL_FOR_NEWSLETTER);
 
     const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary;

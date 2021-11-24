@@ -2,7 +2,6 @@ import { makeStyles } from '@mui/styles';
 
 import LoginForm from "./authForms/LoginForm";
 import RegisterForm from "./authForms/RegisterForm";
-import SubmitButton from "./authForms/SubmitButton";
 
 const Form = ({ closeModal, type, textColor }) => {
     const useStyles = makeStyles({
@@ -21,31 +20,17 @@ const Form = ({ closeModal, type, textColor }) => {
 
   const classes = useStyles();
 
-
-    const submitLogin = () => {
-        closeModal();
-    }
-
-
-    const submitRegister = () => {
-        closeModal();
-    }
-
     return (
         <div>
             {type === 'login'
                 ?
-                <LoginForm classes={classes} textColor={textColor} >
-                    <SubmitButton onSubmitFunction={submitLogin} value="Sign in" />
-                </LoginForm>
+                <LoginForm closeModal={closeModal} classes={classes} />
                 : null
             }
 
             {type === 'register'
                 ?
-                <RegisterForm classes={classes} >
-                    <SubmitButton onSubmitFunction={submitRegister} value="Sign up" />
-                </RegisterForm>
+                <RegisterForm closeModal={closeModal} classes={classes} />
                 : null
             }
         </div>
