@@ -21,7 +21,7 @@ const AuthModal = ({ open, handleClose, theme }) => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-        textAlign: 'center'
+        textAlign: 'center',
     };
 
     return (
@@ -39,7 +39,7 @@ const AuthModal = ({ open, handleClose, theme }) => {
                     </div>
 
                     <div id="modal-modal-description" sx={{ mt: 2 }}>
-                        <Form type={formType} />
+                        <Form closeModal={handleClose} type={formType} textColor={textColor} />
                     </div>
                 </Box>
             </Modal>

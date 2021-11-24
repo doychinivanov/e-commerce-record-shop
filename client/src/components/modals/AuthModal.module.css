@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
 }
-
 .sign-in{
     margin-right: 8px;
     padding-right: 8px;
@@ -11,5 +10,6 @@
 }
 
 .sign-up {
+    padding-left: 8px;
     cursor: pointer;
 }
