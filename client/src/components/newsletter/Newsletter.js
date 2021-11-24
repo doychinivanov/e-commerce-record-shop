@@ -3,11 +3,12 @@ import { useMutation } from '@apollo/client';
 import { Container, TextField, Typography, Box, Button, Grid } from "@mui/material";
 import { toast } from 'react-toastify';
 import SendIcon from '@mui/icons-material/Send';
-
+import { useAuth } from '../../contexts/AuthCtx';
 import { validateEmail } from '../../utils/inputValidation';
 import { ADD_EMAIL_FOR_NEWSLETTER } from '../../graphql/mutations';
 
 const Newsletter = ({ theme }) => {
+    const {currentUser} = useAuth();
     const [isDisabled, setIsDisabled] = useState(false);
     const [emailIsWrong, setEmailIsWrong] = useState(false);
     const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ const Newsletter = ({ theme }) => {
     if (error) {
         toast.error(error.message);
     }
+
+    console.log(currentUser)
 
     const submitEmail = () => {
         if (email.trim() === '' || !validateEmail(email)) {

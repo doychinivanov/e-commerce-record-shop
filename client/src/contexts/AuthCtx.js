@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
         return await authService.signOut(auth);
     };
 
-    const signup = async (email, password) => {
+    const signUpToFirebase = async (email, password) => {
         const createdUser = await authService.createUserWithEmailAndPassword(auth, email, password);
 
         createdUser.user.getIdToken(true)
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         currentUser,
         login,
-        signup,
+        signUpToFirebase,
         logout,
         getNewPassword,
         changeEmail,
