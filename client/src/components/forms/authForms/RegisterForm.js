@@ -7,7 +7,7 @@ import { FormControl, InputLabel, Input, FormHelperText, Button } from '@mui/mat
 import { useAuth } from '../../../contexts/AuthCtx';
 import { CREATE_REGULAR_USER } from '../../../graphql/mutations';
 import { validateEmail, validateName, validatePassword } from '../../../utils/inputValidation';
-
+import { getUserToken } from '../../../api/apiUtils';
 
 const RegisterForm = ({ closeModal, classes }) => {
     const { signUpToFirebase } = useAuth();
@@ -73,7 +73,7 @@ const RegisterForm = ({ closeModal, classes }) => {
         return true;
     }
 
-    const submitRegisterForm = () => {
+    const submitRegisterForm = async () => {
 
         resetErrors();
 
@@ -83,8 +83,13 @@ const RegisterForm = ({ closeModal, classes }) => {
         const loadingToastID = toast.loading("Please wait...");
 
         signUpToFirebase(email, password)
-            .then(() => {
-                mutateFunction({ variables: { email, fullName: name } })
+            .then(async () => {
+                const idToken = await getUserToken();
+
+                return idToken;
+            })
+            .then((idToken) => {
+                mutateFunction({ variables: { email, fullName: name }, context: { headers: { 'x-authorization': idToken } } })
                     .then(({ data }) => {
                         // Add this data to userState
                         console.log(data);

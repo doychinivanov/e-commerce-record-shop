@@ -12,6 +12,22 @@ const CatalogList = ({theme}) => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);
 
+    // Use this to send token
+    // const [loadGreeting, { called, loading, data, error }] = useLazyQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, {context: { headers: { 'x-authorization': idToken } }});
+    // useEffect(() => {
+    //     getUserToken()
+    //     .then(token => {
+    //         console.log(token);
+    //         setIdToken(token);
+    //         if(token){
+    //             loadGreeting();
+    //         }
+    //     }).catch((err) => {
+    //         console.log(err.message);
+    //     })
+    // }, [])
+    
+
     if (error) {
         toast.error(error.message);
     }

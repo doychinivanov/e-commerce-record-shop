@@ -1,6 +1,7 @@
 import userService from "../services/userService.js";
 import recordService from "../services/recordService.js";
 import newsletterService from "../services/newsletterService.js";
+import { addCustomerRole, addAdminRole } from "../utils/userClaims.js";
 
 const resolvers = {
     Query: {
@@ -16,7 +17,9 @@ const resolvers = {
         createNewsletterEmail: (_, {email}) => {
             return newsletterService.addEmailForNewsletter(email);
         },
-        createRegularUser: (_, {email, fullName}) => {
+        createRegularUser: (_, {email, fullName}, context) => {
+            // addAdminRole for admin | addCustomerRole for customer
+            addCustomerRole(context.authData.uid)
             return userService.createUser({email, fullName});
         }
     },

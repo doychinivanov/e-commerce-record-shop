@@ -16,10 +16,17 @@ const getAllUsers = () => {
 }
 
 
+const getUserByEmail = async (email) => {
+    const pattern = new RegExp(`^${email}$`, 'i');
+    const user = await UserSchema.findOne({ email: { $regex: pattern } });
+    return user;
+}
+
+
 export default {
     createUser,
     getUserById,
     getAllUsers,
+    getUserByEmail,
     // updateUser,
-    // getUserByEmail,
 };
