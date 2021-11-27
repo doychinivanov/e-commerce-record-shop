@@ -1,2 +1,0 @@
-export const ADD_TO_CATALOG = 'ADD_TO_CATALOG';
-export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';

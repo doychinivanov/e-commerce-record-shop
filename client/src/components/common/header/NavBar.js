@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import { connect } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +15,7 @@ import ThreeDotsButton from './ThreeDotsButton';
 import SignButton from './SignButton';
 import AuthModal from '../../modals/AuthModal';
 
-const NavBar = ({ theme }) => {
+const NavBar = ({ theme, user }) => {
 
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
@@ -90,16 +91,21 @@ const NavBar = ({ theme }) => {
             <SearchBar classes={classes} />
 
             <LogoBanner textColor={textColor} />
-            
+
             <span className={classes.myComponent}>
               <ThemeSwitcher />
             </span>
 
-            <SignButton handleOpen={handleOpen} theme={theme} textColor={textColor} />
 
-            {/* <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes}/> */}
+            {user ?
+              <>
+                <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes} />
 
-            <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes} />
+                <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes} />
+              </>
+              : <SignButton handleOpen={handleOpen} theme={theme} textColor={textColor} />
+            }
+
           </Toolbar>
         </AppBar>
 
@@ -112,5 +118,10 @@ const NavBar = ({ theme }) => {
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
 
-export default NavBar;
+export default connect(mapStateToProps)(NavBar);

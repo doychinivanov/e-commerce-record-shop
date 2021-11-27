@@ -1,7 +1,18 @@
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose}) => {
+import { connect } from 'react-redux';
+import { useAuth } from '../../../contexts/AuthCtx';
+import { removeUserFromState } from '../../../redux/user/user-actions';
+ 
+const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose, removeUserFromState}) => {
+  
+  const { logout } = useAuth();
+
+  const onLogout = () => {
+    logout();
+    removeUserFromState();
+  }
 
     return (
         <Menu
@@ -22,8 +33,15 @@ const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose}) => {
       >
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={onLogout}>Logout</MenuItem>
       </Menu>
     );
 }
 
-export default DekstopDropDown;
+const mapDispatchToProps = dispatch => {
+  return {
+      removeUserFromState: (userData) => dispatch(removeUserFromState(userData))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DekstopDropDown);

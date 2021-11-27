@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { connect } from 'react-redux';
+import { addUserToState } from '../../../redux/user/user-actions';
 
 import { toast } from 'react-toastify';
 import { FormControl, InputLabel, Input, FormHelperText, Button } from '@mui/material';
@@ -9,7 +11,7 @@ import { CREATE_REGULAR_USER } from '../../../graphql/mutations';
 import { validateEmail, validateName, validatePassword } from '../../../utils/inputValidation';
 import { getUserToken } from '../../../api/apiUtils';
 
-const RegisterForm = ({ closeModal, classes }) => {
+const RegisterForm = ({ closeModal, classes, addUserToState }) => {
     const { signUpToFirebase } = useAuth();
 
     const [email, setEmail] = useState(undefined);
@@ -91,8 +93,7 @@ const RegisterForm = ({ closeModal, classes }) => {
             .then((idToken) => {
                 mutateFunction({ variables: { email, fullName: name }, context: { headers: { 'x-authorization': idToken } } })
                     .then(({ data }) => {
-                        // Add this data to userState
-                        console.log(data);
+                        addUserToState(data.createRegularUser);
                     }).then(() => {
                         setIsLoading(false);
                         toast.update(loadingToastID, { render: "Welcome to Vinyled.", type: "success", isLoading: false, autoClose: 5000 });
@@ -166,4 +167,10 @@ const RegisterForm = ({ closeModal, classes }) => {
     )
 }
 
-export default RegisterForm;
+const mapDispatchToProps = dispatch => {
+    return {
+        addUserToState: (userData) => dispatch(addUserToState(userData))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(RegisterForm);
