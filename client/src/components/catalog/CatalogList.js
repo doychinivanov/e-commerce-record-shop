@@ -10,23 +10,7 @@ import CatalogCard from "./CatalogCard";
 
 const CatalogList = ({theme}) => {
 
-    const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);
-
-    // Use this to send token
-    // const [loadGreeting, { called, loading, data, error }] = useLazyQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, {context: { headers: { 'x-authorization': idToken } }});
-    // useEffect(() => {
-    //     getUserToken()
-    //     .then(token => {
-    //         console.log(token);
-    //         setIdToken(token);
-    //         if(token){
-    //             loadGreeting();
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err.message);
-    //     })
-    // }, [])
-    
+    const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);    
 
     if (error) {
         toast.error(error.message);
@@ -35,7 +19,7 @@ const CatalogList = ({theme}) => {
     return (
         <div style={{ 'paddingTop': 90, 'paddingBottom': 90, backgroundColor: theme.palette.background.primary }}>
             <Container fixed>
-                <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
+                <Grid container spacing={{ xs: 2, md: 2,}} columns={{ xs: 2, sm: 8, md: 12 }}>
 
                     {loading || error
                         ?

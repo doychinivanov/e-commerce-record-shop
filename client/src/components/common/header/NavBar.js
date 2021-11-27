@@ -17,6 +17,8 @@ import AuthModal from '../../modals/AuthModal';
 
 const NavBar = ({ theme, user }) => {
 
+  console.log(user);
+
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
   const useStyles = makeStyles({

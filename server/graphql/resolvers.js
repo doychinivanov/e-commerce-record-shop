@@ -6,7 +6,11 @@ import { addCustomerRole, addAdminRole } from "../utils/userClaims.js";
 const resolvers = {
     Query: {
         users: async () => userService.getAllUsers(),
-        user: async (_, {id}) =>  userService.getUserById(id),
+        user: async (_, {email}, context) =>  {
+            if(!context.authData) throw new Error('Failed to login!');
+
+            return userService.getUserByEmail(email)
+        },
         records: async () => recordService.getAllRecords(),
         record: async(_, {id}) => recordService.getRecordById(id),
         recordsByOldestToNewest: async() =>  recordService.getAllRecordsInDescByYear(),
@@ -19,6 +23,8 @@ const resolvers = {
         },
         createRegularUser: (_, {email, fullName}, context) => {
             // addAdminRole for admin | addCustomerRole for customer
+            if(!context.authData) throw new Error('Failed to register!');
+
             addCustomerRole(context.authData.uid)
             return userService.createUser({email, fullName});
         }

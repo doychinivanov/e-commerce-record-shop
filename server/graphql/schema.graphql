@@ -1,6 +1,6 @@
 type Query {
     users: [User]
-    user(id: ID!): User
+    user(email: String!): User
     records: [Record]
     recordsByOldestToNewest: [Record]
     recordsByNewestToOldest: [Record]

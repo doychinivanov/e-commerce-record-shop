@@ -12,6 +12,7 @@ const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose, removeU
   const onLogout = () => {
     logout();
     removeUserFromState();
+    handleMenuClose();
   }
 
     return (
@@ -31,9 +32,9 @@ const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose, removeU
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={onLogout}>Logout</MenuItem>
+        <MenuItem sx={{width: '100%'}} onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem sx={{width: '100%'}} onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem sx={{width: '100%'}} onClick={onLogout}>Logout</MenuItem>
       </Menu>
     );
 }

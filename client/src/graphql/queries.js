@@ -22,4 +22,22 @@ export const GET_PRODUCT_INFO_FOR_DETAILS = gql`
             description
         }
     }
-`; 
+`;
+
+
+export const GET_USER_BY_EMAIL = gql`
+    query GetOneUser($email: String!) {
+        user(email: $email) {
+            _id
+            email
+            fullName
+            imageUrl
+            favorites {
+                _id
+            }
+            cart {
+                _id
+            }
+        }
+    }
+`
