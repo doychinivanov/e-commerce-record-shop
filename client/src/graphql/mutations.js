@@ -28,8 +28,8 @@ export const CREATE_REGULAR_USER = gql`
 export const ADD_TO_FAVORITES = gql`
     mutation AddRecordToFavorites($userId: ID!, $recordId: ID!) {
         addRecordToFavorites(userId: $userId,     recordId: $recordId) {
-            fullName
             favorites {
+                _id
                 name
             }
         }

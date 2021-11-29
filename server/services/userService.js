@@ -1,4 +1,5 @@
 import UserSchema from '../models/User.js';
+import RecordSchema from '../models/Record.js';
 
 const createUser = (userData) => {
     const user = new UserSchema(userData);
@@ -24,9 +25,10 @@ const getUserByEmail = async (email) => {
 
 const addRecordToFavorites = async(userId, recordId) => {
     const user = await UserSchema.findById(userId);
+    const recordName = await RecordSchema.findById(recordId, {name:1, _id:0});
 
     if(!user || user.favorites.includes(recordId)){
-        throw new Error('You already have -recordName- in your favorites.');
+        throw new Error(`You already have ${recordName.name} in your favorites.`);
     }
 
     user.favorites.push(recordId);

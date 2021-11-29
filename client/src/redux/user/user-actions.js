@@ -13,6 +13,13 @@ export const removeUserFromState = () => {
     }
 }
 
+export const addRecordToFavorites = (updatedFavorites) => {
+    return {
+        type: actionTypes.ADD_RECORD_TO_FAVORITES,
+        payload: updatedFavorites
+    }
+}
+
 
 // export const loadCurrentItem = (item) => {
 //     return {

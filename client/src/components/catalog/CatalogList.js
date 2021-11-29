@@ -44,7 +44,14 @@ const CatalogList = ({theme, user, handleOpen}) => {
                             </Grid>
                         </>
                         :
-                        data.records.map(record => <CatalogCard key={record._id} theme={theme} record={record} userId={user?._id} handleOpen={handleOpen} />)
+                        data.records.map(record => <CatalogCard
+                            key={record._id}
+                            theme={theme}
+                            record={record}
+                            userId={user?._id}
+                            handleOpen={handleOpen}
+                            userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
+                            />)
                     }
 
                 </Grid >

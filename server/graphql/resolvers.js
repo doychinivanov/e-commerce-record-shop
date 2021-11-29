@@ -7,7 +7,7 @@ const resolvers = {
     Query: {
         users: async () => userService.getAllUsers(),
         user: async (_, {email}, context) =>  {
-            if(!context.authData) throw new Error('Failed to login!');
+            // if(!context.authData) throw new Error('Failed to login!');
 
             return userService.getUserByEmail(email)
         },
