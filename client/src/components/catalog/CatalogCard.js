@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
+import { getUserToken } from '../../api/apiUtils';
 
 import { ADD_TO_FAVORITES } from '../../graphql/mutations';
 import { updateUserFavorites } from '../../redux/user/user-actions';
@@ -21,13 +22,15 @@ const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavor
 
     const [mutateFavorites, {}] = useMutation(ADD_TO_FAVORITES);
 
-    const addToFavorite = () => {
+    const addToFavorite = async () => {
         if (!userId) {
             toast.warning('You must be signed in.')
             return handleOpen()
         };
 
-        mutateFavorites({ variables: { userId, recordId: record._id } })
+        const idToken = await getUserToken();
+
+        mutateFavorites({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
                 updateUserFavorites(data.addRecordToFavorites.favorites);
             })

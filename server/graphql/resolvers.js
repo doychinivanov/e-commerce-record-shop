@@ -28,8 +28,16 @@ const resolvers = {
             addCustomerRole(context.authData.uid)
             return userService.createUser({email, fullName});
         },
-        addRecordToFavorites: (_, {userId, recordId}) => userService.addRecordToFavorites(userId, recordId),
-        removeRecordFromFavorites: (_, {userId, recordId}) => userService.removeRecordFromFavorites(userId, recordId),
+        addRecordToFavorites: (_, {userId, recordId}, context) => {
+            if(!context.authData) throw new Error('Unauthorized request!');
+
+            return userService.addRecordToFavorites(userId, recordId)
+        },
+        removeRecordFromFavorites: (_, {userId, recordId}, context) => {
+            if(!context.authData) throw new Error('Unauthorized request!');
+
+            return userService.removeRecordFromFavorites(userId, recordId)
+        },
     },
     User: {
         favorites: async (user) => (await user.populate('favorites')).favorites

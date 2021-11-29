@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { connect } from "react-redux";
+import { toast } from 'react-toastify';
 
 import { REMOVE_FROM_FAVORITES } from '../../graphql/mutations';
 import { updateUserFavorites } from '../../redux/user/user-actions';
-import { toast } from 'react-toastify';
+import { getUserToken } from '../../api/apiUtils';
 
 import styles from './FavoritesCard.module.css';
 import { Button } from "@mui/material";
@@ -18,9 +19,11 @@ const FavoritesCard = ({recordData, userId, theme, updateUserFavorites}) => {
     const [mutateFavorites, {}] = useMutation(REMOVE_FROM_FAVORITES);
 
 
-    const removeRecord = () => {
+    const removeRecord = async () => {
 
-        mutateFavorites({ variables: { userId, recordId: recordData._id } })
+        const idToken = await getUserToken();
+
+        mutateFavorites({ variables: { userId, recordId: recordData._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
                 updateUserFavorites(data.removeRecordFromFavorites.favorites);
             })
