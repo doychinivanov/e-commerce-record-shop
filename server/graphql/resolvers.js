@@ -7,7 +7,7 @@ const resolvers = {
     Query: {
         users: async () => userService.getAllUsers(),
         user: async (_, {email}, context) =>  {
-            // if(!context.authData) throw new Error('Failed to login!');
+            if(!context.authData) throw new Error('Failed to login!');
 
             return userService.getUserByEmail(email)
         },
@@ -29,6 +29,7 @@ const resolvers = {
             return userService.createUser({email, fullName});
         },
         addRecordToFavorites: (_, {userId, recordId}) => userService.addRecordToFavorites(userId, recordId),
+        removeRecordFromFavorites: (_, {userId, recordId}) => userService.removeRecordFromFavorites(userId, recordId),
     },
     User: {
         favorites: async (user) => (await user.populate('favorites')).favorites

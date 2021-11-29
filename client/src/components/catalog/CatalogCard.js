@@ -10,14 +10,14 @@ import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
 
 import { ADD_TO_FAVORITES } from '../../graphql/mutations';
-import { addRecordToFavorites } from '../../redux/user/user-actions';
+import { updateUserFavorites } from '../../redux/user/user-actions';
 
 
 import { Grid } from "@mui/material";
 
 import styles from './CatalogCard.module.css';
 
-const CatalogCard = ({ theme, record, userId = null, handleOpen, addRecordToFavorites, userHasThisRecord }) => {
+const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavorites, userHasThisRecord }) => {
 
     const [mutateFavorites, {}] = useMutation(ADD_TO_FAVORITES);
 
@@ -29,9 +29,7 @@ const CatalogCard = ({ theme, record, userId = null, handleOpen, addRecordToFavo
 
         mutateFavorites({ variables: { userId, recordId: record._id } })
             .then(({data}) => {
-                console.log(data)
-                addRecordToFavorites(data.addRecordToFavorites.favorites);
-                toast.success('Done!');
+                updateUserFavorites(data.addRecordToFavorites.favorites);
             })
             .catch(err => {
                 toast.error(err.message);
@@ -73,7 +71,7 @@ return (
 
 const mapDispatchToProps = dispatch => {
     return {
-        addRecordToFavorites: (userData) => dispatch(addRecordToFavorites(userData))
+        updateUserFavorites: (userData) => dispatch(updateUserFavorites(userData))
     }
 }
 

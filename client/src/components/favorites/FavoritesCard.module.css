@@ -1,0 +1,27 @@
+.card-container {
+    display: flex;
+    margin-bottom: 3rem;
+    border-radius: 1.2rem;
+}
+
+.record-img {
+    width: 20%;
+}
+
+.card-data{
+    width: 75%;
+    margin-left: 2rem;
+}
+
+.record-name {
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+}
+
+.record-creator {
+    margin-top: 0.5rem;
+}
+
+.button-holder{
+    margin-right: 0.7rem;
+}

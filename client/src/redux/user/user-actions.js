@@ -13,9 +13,9 @@ export const removeUserFromState = () => {
     }
 }
 
-export const addRecordToFavorites = (updatedFavorites) => {
+export const updateUserFavorites = (updatedFavorites) => {
     return {
-        type: actionTypes.ADD_RECORD_TO_FAVORITES,
+        type: actionTypes.UPDATE_USER_FAVORITES,
         payload: updatedFavorites
     }
 }

@@ -35,6 +35,9 @@ export const GET_USER_BY_EMAIL = gql`
             favorites {
                 _id
                 name
+                imageUrl
+                creatorArtist
+                price
             }
             cart {
                 _id

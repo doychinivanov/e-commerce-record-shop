@@ -27,11 +27,26 @@ const addRecordToFavorites = async(userId, recordId) => {
     const user = await UserSchema.findById(userId);
     const recordName = await RecordSchema.findById(recordId, {name:1, _id:0});
 
-    if(!user || user.favorites.includes(recordId)){
+    if(!user) throw new Error(`Unauthorized.`);
+
+    if(user.favorites.includes(recordId)){
         throw new Error(`You already have ${recordName.name} in your favorites.`);
     }
 
     user.favorites.push(recordId);
+    return user.save();
+}
+
+const removeRecordFromFavorites = async(userId, recordId) => {
+    const user = await UserSchema.findById(userId);
+
+    if(!user) throw new Error(`Unauthorized.`);
+
+    if(!user.favorites.includes(recordId)){
+        throw new Error(`You can\'t remove a course you have not added.`);
+    }
+
+    user.favorites.splice(user.favorites.indexOf(recordId), 1);
     return user.save();
 }
 
@@ -41,5 +56,6 @@ export default {
     getUserById,
     getAllUsers,
     getUserByEmail,
-    addRecordToFavorites
+    addRecordToFavorites,
+    removeRecordFromFavorites
 };

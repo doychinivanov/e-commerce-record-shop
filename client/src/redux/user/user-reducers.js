@@ -8,7 +8,7 @@ const userReducer = (state = INITIAL_USER_STATE, action) => {
             return {...action.payload}
         case actionTypes.REMOVE_USER_FROM_STATE:
             return null
-        case actionTypes.ADD_RECORD_TO_FAVORITES: 
+        case actionTypes.UPDATE_USER_FAVORITES: 
             return {...state, favorites: action.payload}    
         default: 
             return state;    

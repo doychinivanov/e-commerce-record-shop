@@ -12,6 +12,7 @@ type Mutation {
     createNewsletterEmail(email: String!): NewsletterEmail!
     createRegularUser(email: String!, fullName: String!): User!
     addRecordToFavorites(userId: ID!, recordId: ID!): User!
+    removeRecordFromFavorites(userId: ID!, recordId: ID!): User!
 }
 
 type User {

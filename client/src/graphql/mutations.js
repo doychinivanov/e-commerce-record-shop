@@ -31,6 +31,23 @@ export const ADD_TO_FAVORITES = gql`
             favorites {
                 _id
                 name
+                imageUrl
+                creatorArtist
+                price
+            }
+        }
+    }
+`;
+
+export const REMOVE_FROM_FAVORITES = gql`
+    mutation removeRecordFromFavorites($userId: ID!, $recordId: ID!) {
+        removeRecordFromFavorites(userId: $userId, recordId: $recordId) {
+            favorites {
+                _id
+                name
+                imageUrl
+                creatorArtist
+                price
             }
         }
     }

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import IconButton from '@mui/material/IconButton';
@@ -13,11 +15,14 @@ const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
 
       <div className={classes.myComponent}>
 
-        <IconButton size="large" aria-label="show 4 new mails">
-          <Badge>
-            <FavoriteBorderIcon />
-          </Badge>
-        </IconButton>
+        <Link to='/favorites'>
+          <IconButton size="large" aria-label="show 4 new mails">
+            <Badge>
+              <FavoriteBorderIcon />
+            </Badge>
+          </IconButton>
+        </Link>
+
 
 
         <IconButton
