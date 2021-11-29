@@ -15,9 +15,7 @@ import ThreeDotsButton from './ThreeDotsButton';
 import SignButton from './SignButton';
 import AuthModal from '../../modals/AuthModal';
 
-const NavBar = ({ theme, user }) => {
-
-  console.log(user);
+const NavBar = ({ theme, user, open, handleOpen, handleClose }) => {
 
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
@@ -39,9 +37,9 @@ const NavBar = ({ theme, user }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
 
   const isMenuOpen = Boolean(anchorEl);

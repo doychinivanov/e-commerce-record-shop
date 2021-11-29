@@ -27,7 +27,8 @@ const resolvers = {
 
             addCustomerRole(context.authData.uid)
             return userService.createUser({email, fullName});
-        }
+        },
+        addRecordToFavorites: (_, {userId, recordId}) => userService.addRecordToFavorites(userId, recordId),
     },
     User: {
         favorites: async (user) => (await user.populate('favorites')).favorites

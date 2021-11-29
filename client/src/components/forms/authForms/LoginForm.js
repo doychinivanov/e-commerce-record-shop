@@ -108,7 +108,7 @@ const LoginForm = ({ closeModal, classes, addUserToState }) => {
 
                 <Button onClick={submitLoginForm} sx={{ mt: 5 }}>
                     <span style={{ color: '#f5f5f5' }}>
-                        Sign Up
+                        Sign In
                     </span>
                 </Button>
             </FormControl>

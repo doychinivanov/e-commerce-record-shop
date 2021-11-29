@@ -3,14 +3,37 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useMutation } from '@apollo/client';
+
+import { ADD_TO_FAVORITES } from '../../graphql/mutations';
 
 
 import { Grid } from "@mui/material";
 
 import styles from './CatalogCard.module.css';
 
-const CatalogCard = ({ theme, record }) => {
+const CatalogCard = ({ theme, record, userId = null, handleOpen }) => {
+
+    const [mutateFavorites, { error }] = useMutation(ADD_TO_FAVORITES);
+
+    if (error) {
+        toast.error(error.message);
+    }
+
+    const addToFavorite = () => {
+        if (!userId) {
+            toast.warning('You must be signed in.')
+            return handleOpen()
+        };
+
+        mutateFavorites({ variables: { userId, recordId: record._id } })
+            .then(response => {
+                toast.success('Done!');
+            });
+    }
 
     return (
         <Grid item xs={2} sm={4} md={3}>
@@ -34,7 +57,7 @@ const CatalogCard = ({ theme, record }) => {
                         </div>
                     </Link>
 
-                    <div className={styles.icon}>
+                    <div onClick={addToFavorite} className={styles.icon}>
                         <FavoriteBorderOutlinedIcon />
                     </div>
 

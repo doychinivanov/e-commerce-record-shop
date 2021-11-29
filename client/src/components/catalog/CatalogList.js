@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { Grid, Container, Skeleton } from "@mui/material";
@@ -8,7 +9,7 @@ import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
 
 import CatalogCard from "./CatalogCard";
 
-const CatalogList = ({theme}) => {
+const CatalogList = ({theme, user, handleOpen}) => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);    
 
@@ -43,7 +44,7 @@ const CatalogList = ({theme}) => {
                             </Grid>
                         </>
                         :
-                        data.records.map(record => <CatalogCard key={record._id} theme={theme} record={record} />)
+                        data.records.map(record => <CatalogCard key={record._id} theme={theme} record={record} userId={user?._id} handleOpen={handleOpen} />)
                     }
 
                 </Grid >
@@ -52,4 +53,10 @@ const CatalogList = ({theme}) => {
     );
 }
 
-export default CatalogList;
+const mapStateToProps = state => {
+    return {
+      user: state.user
+    }
+  }
+
+export default connect(mapStateToProps)(CatalogList);

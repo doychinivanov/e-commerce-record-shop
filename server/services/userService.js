@@ -22,11 +22,22 @@ const getUserByEmail = async (email) => {
     return user;
 }
 
+const addRecordToFavorites = async(userId, recordId) => {
+    const user = await UserSchema.findById(userId);
+
+    if(!user || user.favorites.includes(recordId)){
+        throw new Error('You already have -recordName- in your favorites.');
+    }
+
+    user.favorites.push(recordId);
+    return user.save();
+}
+
 
 export default {
     createUser,
     getUserById,
     getAllUsers,
     getUserByEmail,
-    // updateUser,
+    addRecordToFavorites
 };
