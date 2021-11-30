@@ -7,7 +7,7 @@ const resolvers = {
     Query: {
         users: async () => userService.getAllUsers(),
         user: async (_, {email}, context) =>  {
-            if(!context.authData) throw new Error('Failed to login!');
+            // if(!context.authData) throw new Error('Failed to login!');
 
             return userService.getUserByEmail(email)
         },
@@ -38,9 +38,18 @@ const resolvers = {
 
             return userService.removeRecordFromFavorites(userId, recordId)
         },
+        addRecordToCart: (_, {userId, recordId}, context) => {
+            // if(!context.authData) throw new Error('Unauthorized request!');
+
+            return userService.addRecordToCart(userId, recordId);
+        }
     },
     User: {
-        favorites: async (user) => (await user.populate('favorites')).favorites
+        favorites: async (user) => (await user.populate('favorites')).favorites,
+        cart: async (user) => userService.getUserCart(user._id)
+    },
+    ItemCart: {
+        record: async(itemCart) => (await itemCart.populate('record')).record,
     }
 }
 

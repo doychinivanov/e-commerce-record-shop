@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { getUserToken } from '../../api/apiUtils';
 
 import { ADD_TO_FAVORITES } from '../../graphql/mutations';
+import { REMOVE_FROM_FAVORITES } from '../../graphql/mutations';
 import { updateUserFavorites } from '../../redux/user/user-actions';
 
 
@@ -20,7 +21,9 @@ import styles from './CatalogCard.module.css';
 
 const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavorites, userHasThisRecord }) => {
 
-    const [mutateFavorites, {}] = useMutation(ADD_TO_FAVORITES);
+    const [addToFavs, {}] = useMutation(ADD_TO_FAVORITES);
+
+    const [removeFromFavs, {}] = useMutation(REMOVE_FROM_FAVORITES);
 
     const addToFavorite = async () => {
         if (!userId) {
@@ -30,9 +33,22 @@ const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavor
 
         const idToken = await getUserToken();
 
-        mutateFavorites({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
+        addToFavs({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
                 updateUserFavorites(data.addRecordToFavorites.favorites);
+            })
+            .catch(err => {
+                toast.error(err.message);
+            })
+    }
+
+    const removeRecord = async () => {
+
+        const idToken = await getUserToken();
+
+        removeFromFavs({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
+            .then(({data}) => {
+                updateUserFavorites(data.removeRecordFromFavorites.favorites);
             })
             .catch(err => {
                 toast.error(err.message);
@@ -61,7 +77,7 @@ return (
                     </div>
                 </Link>
 
-                <div onClick={addToFavorite} className={styles.icon}>
+                <div onClick={userHasThisRecord ? removeRecord : addToFavorite} className={styles.icon}>
                    {userHasThisRecord ? <FavoriteIcon color="error" /> : <FavoriteBorderOutlinedIcon /> }
                 </div>
 

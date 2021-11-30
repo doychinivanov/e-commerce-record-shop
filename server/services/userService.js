@@ -1,5 +1,6 @@
 import UserSchema from '../models/User.js';
 import RecordSchema from '../models/Record.js';
+import ItemCartSchema from '../models/ItemCart.js';
 
 const createUser = (userData) => {
     const user = new UserSchema(userData);
@@ -23,13 +24,13 @@ const getUserByEmail = async (email) => {
     return user;
 }
 
-const addRecordToFavorites = async(userId, recordId) => {
+const addRecordToFavorites = async (userId, recordId) => {
     const user = await UserSchema.findById(userId);
-    const recordName = await RecordSchema.findById(recordId, {name:1, _id:0});
+    const recordName = await RecordSchema.findById(recordId, { name: 1, _id: 0 });
 
-    if(!user) throw new Error(`Unauthorized.`);
+    if (!user) throw new Error(`Unauthorized.`);
 
-    if(user.favorites.includes(recordId)){
+    if (user.favorites.includes(recordId)) {
         throw new Error(`You already have ${recordName.name} in your favorites.`);
     }
 
@@ -37,18 +38,37 @@ const addRecordToFavorites = async(userId, recordId) => {
     return user.save();
 }
 
-const removeRecordFromFavorites = async(userId, recordId) => {
+const removeRecordFromFavorites = async (userId, recordId) => {
     const user = await UserSchema.findById(userId);
 
-    if(!user) throw new Error(`Unauthorized.`);
+    if (!user) throw new Error(`Unauthorized.`);
 
-    if(!user.favorites.includes(recordId)){
+    if (!user.favorites.includes(recordId)) {
         throw new Error(`You can\'t remove a course you have not added.`);
     }
 
     user.favorites.splice(user.favorites.indexOf(recordId), 1);
     return user.save();
 }
+
+const addRecordToCart = async (userId, recordId) => {
+    if (!userId || !recordId) throw new Error(`Unauthorized.`);
+
+    const existingCartItem = await ItemCartSchema.findOne({record: recordId, custumer: userId});
+
+    if(!existingCartItem) {
+        const cartItem = new ItemCartSchema({record: recordId, custumer: userId});
+
+        return cartItem.save();
+    } else {
+        existingCartItem.quantity += 1;
+        return existingCartItem.save();
+    }
+
+
+}
+
+const getUserCart = (userId) => ItemCartSchema.find({custumer: userId});
 
 
 export default {
@@ -57,5 +77,7 @@ export default {
     getAllUsers,
     getUserByEmail,
     addRecordToFavorites,
-    removeRecordFromFavorites
+    removeRecordFromFavorites,
+    addRecordToCart,
+    getUserCart
 };

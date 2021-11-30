@@ -13,6 +13,7 @@ type Mutation {
     createRegularUser(email: String!, fullName: String!): User!
     addRecordToFavorites(userId: ID!, recordId: ID!): User!
     removeRecordFromFavorites(userId: ID!, recordId: ID!): User!
+    addRecordToCart(userId: ID!, recordId: ID!): ItemCart!
 }
 
 type User {
@@ -21,7 +22,7 @@ type User {
     email: String!
     favorites: [Record]
     imageUrl: String!
-    cart: [Record]
+    cart: [ItemCart]
 }
 
 type Record {
@@ -32,8 +33,15 @@ type Record {
     creatorArtist: String!
     imageUrl: String!
     category: String!
-    price: Int!,
+    price: Int!
     description: String!
+}
+
+type ItemCart {
+    _id: ID!
+    record: Record!
+    cutumer: User!
+    quantity: Int!
 }
 
 type NewsletterEmail {
