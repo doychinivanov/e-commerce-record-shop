@@ -64,8 +64,23 @@ const addRecordToCart = async (userId, recordId) => {
         existingCartItem.quantity += 1;
         return existingCartItem.save();
     }
+}
 
+const removeFromCart = async (userId, recordId) => {
+    if (!userId || !recordId) throw new Error(`Unauthorized.`);
 
+    const existingCartItem = await ItemCartSchema.findOne({record: recordId, custumer: userId});
+
+    if(!existingCartItem) throw new Error('No such item in cart!');
+
+    existingCartItem.quantity -= 1;
+    existingCartItem.save();
+
+    if(existingCartItem.quantity <= 0) {
+        return ItemCartSchema.findOneAndDelete({record: recordId});
+    }
+
+    return existingCartItem;
 }
 
 const getUserCart = (userId) => ItemCartSchema.find({custumer: userId});
@@ -79,5 +94,6 @@ export default {
     addRecordToFavorites,
     removeRecordFromFavorites,
     addRecordToCart,
-    getUserCart
+    getUserCart,
+    removeFromCart
 };
