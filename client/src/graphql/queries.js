@@ -59,6 +59,7 @@ export const GET_USER_CART = gql`
         userCart(userId: $userId) {
             record {
                 name
+                creatorArtist
                 price
                 imageUrl
                 _id

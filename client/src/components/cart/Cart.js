@@ -13,7 +13,7 @@ const Cart = ({theme, userId}) => {
 
     if(error) toast.error(error.message);
 
-    console.log(data.userCart);
+    console.log(data);
 
     return (
         <div style={{ 'paddingTop': 90, 'paddingBottom': 90, backgroundColor: theme.palette.background.primary, color: textColor }}>
