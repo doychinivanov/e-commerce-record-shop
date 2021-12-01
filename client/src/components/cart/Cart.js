@@ -33,6 +33,8 @@ const Cart = ({ theme, userId, cart, loadCartToState }) => {
                         }
 
                     </Box>
+
+                    <h1>Total Price: {cart.reduce((acc, curr) => acc + (curr.quantity * curr.record.price), 0)}</h1>
             </Container>
         </div>
     )

@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import styles from './CartItem.module.css';
 
 const CartItem = ({ item, theme }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
+
+    const [currentQty, setCurrentQty] = useState(item.quantity);
 
     return (
         <div className={styles['cart-item-holder']}>
@@ -28,7 +31,12 @@ const CartItem = ({ item, theme }) => {
             <div className={styles['cart-item-details']}>
                 <span>
                     Quantity: 
-                    <input className={styles['quantity-input']} value={item.quantity} type="number" />
+                    <input
+                    onKeyUp={() => setCurrentQty(oldState => oldState += 1)}
+                    onKeyDown={() => setCurrentQty(oldState => oldState -= 1)}
+                    className={styles['quantity-input']}
+                    defaultValue={currentQty}
+                    type="number" />
                 </span>
 
 
