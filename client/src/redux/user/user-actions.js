@@ -45,3 +45,10 @@ export const adjustQty = (itemId, newQty) => {
         }
     }
 }
+
+export const addCartState = (cartArray) => {
+    return {
+        type: actionTypes.ADD_CART_STATE,
+        payload: cartArray
+    }
+}

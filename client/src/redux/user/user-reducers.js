@@ -21,6 +21,11 @@ const userReducer = (state = INITIAL_USER_STATE, action) => {
                     : item) 
                 : [...state.cart, action.payload]
             };
+        case actionTypes.ADD_CART_STATE:
+            return {
+                ...state,
+                cart: action.payload
+            }    
         case actionTypes.REMOVE_FROM_CARD:
             return {}
         case actionTypes.ADJUST_QUANTITY:

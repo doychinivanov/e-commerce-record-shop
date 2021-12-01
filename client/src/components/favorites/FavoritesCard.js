@@ -11,13 +11,14 @@ import styles from './FavoritesCard.module.css';
 import { Button } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const FavoritesCard = ({recordData, userId, theme, updateUserFavorites, addToCartInState}) => {
+const FavoritesCard = ({ recordData, userId, theme, updateUserFavorites, addToCartInState }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
-    const [mutateFavorites, {}] = useMutation(REMOVE_FROM_FAVORITES);
-    const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
+    const [mutateFavorites, { }] = useMutation(REMOVE_FROM_FAVORITES);
+    const [mutateCart, { }] = useMutation(ADD_ITEM_TO_CART);
 
 
     const removeRecord = async () => {
@@ -25,7 +26,7 @@ const FavoritesCard = ({recordData, userId, theme, updateUserFavorites, addToCar
         const idToken = await getUserToken();
 
         mutateFavorites({ variables: { userId, recordId: recordData._id }, context: { headers: { 'x-authorization': idToken } } })
-            .then(({data}) => {
+            .then(({ data }) => {
                 updateUserFavorites(data.removeRecordFromFavorites.favorites);
             })
             .catch(err => {
@@ -37,14 +38,14 @@ const FavoritesCard = ({recordData, userId, theme, updateUserFavorites, addToCar
         const idToken = await getUserToken();
 
         mutateCart({ variables: { userId, recordId: recordData._id }, context: { headers: { 'x-authorization': idToken } } })
-            .then(({data}) => {
+            .then(({ data }) => {
                 addToCartInState(data.addRecordToCart);
             })
             .catch(err => toast.error(err.message));
     }
 
     return (
-        <div className={styles['card-container']} style={{backgroundColor: theme.palette.background.secondary}}>
+        <div className={styles['card-container']} style={{ backgroundColor: theme.palette.background.secondary }}>
             <img className={styles['record-img']} src={recordData.imageUrl} alt="record cover" />
 
             <div className={styles['card-data']}>
@@ -63,19 +64,19 @@ const FavoritesCard = ({recordData, userId, theme, updateUserFavorites, addToCar
 
                 <span className={styles['button-holder']}>
                     <Link to={`/products/${recordData._id}`}>
-                    <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
-                        <span style={{ color: buttonColor, display: 'flex' }}>
-                            <SearchOutlinedIcon />
-                            <span style={{ color: buttonColor }} className={styles['btn-content']}>See more</span>
-                        </span>
-                    </Button>
+                        <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
+                            <span style={{ color: buttonColor, display: 'flex' }}>
+                                <SearchOutlinedIcon />
+                                <span style={{ color: buttonColor }} className={styles['btn-content']}>See more</span>
+                            </span>
+                        </Button>
                     </Link>
                 </span>
 
                 <span onClick={removeRecord} className={styles['button-holder']}>
                     <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                         <span style={{ color: buttonColor, display: 'flex' }}>
-                            <SearchOutlinedIcon />
+                            <DeleteIcon />
                             <span style={{ color: buttonColor }} className={styles['btn-content']}>Remove</span>
                         </span>
                     </Button>
