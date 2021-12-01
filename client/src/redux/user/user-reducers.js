@@ -10,7 +10,7 @@ const userReducer = (state = INITIAL_USER_STATE, action) => {
             return null
         case actionTypes.UPDATE_USER_FAVORITES:
             return { ...state, favorites: action.payload }
-        case actionTypes.ADD_ITEM_TO_CARD:
+        case actionTypes.ADD_ITEM_TO_STATE_CART:
             const isInCart = state?.cart.find(x => x._id === action.payload._id ? true : false);
                 
             return {

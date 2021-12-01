@@ -1,10 +1,31 @@
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useMutation } from '@apollo/client';
+
+import { addToCart } from '../../redux/user/user-actions';
+import { ADD_ITEM_TO_CART } from '../../graphql/mutations';
+import { getUserToken } from '../../api/apiUtils';
+
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Grid, Button } from "@mui/material";
 
 import styles from './ProductDetailsContent.module.css';
 
-const ProductDetailsContent = ({theme, data }) => {
+const ProductDetailsContent = ({theme, data, addToCartInState, user }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
+
+    const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
+
+    const addToCart = async () => {
+        const idToken = await getUserToken();
+
+        mutateCart({ variables: { userId: user._id, recordId: data.record._id }, context: { headers: { 'x-authorization': idToken } } })
+            .then(({data}) => {
+                console.log(data);
+                addToCartInState(data.addRecordToCart)
+            })
+            .catch(err => toast.error(err.message));
+    }
     
     return (
         <>
@@ -22,7 +43,8 @@ const ProductDetailsContent = ({theme, data }) => {
 
                 <span>
                     <h3>Price: {data.record.price}$</h3>
-                    <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
+
+                    <Button onClick={addToCart} variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                         <span style={{ color: buttonColor, display: 'flex' }}>
                             <ShoppingCartOutlinedIcon />
                             <span style={{ color: buttonColor }} className={styles['btn-content']}>Add to Cart</span>
@@ -34,4 +56,16 @@ const ProductDetailsContent = ({theme, data }) => {
     )
 }
 
-export default ProductDetailsContent;
+const mapStateToProps = state => {
+    return {
+      user: state.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCartInState: (newItem) => dispatch(addToCart(newItem))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailsContent);

@@ -22,7 +22,7 @@ export const updateUserFavorites = (updatedFavorites) => {
 
 export const addToCart = (newItem) => {
     return {
-        type: actionTypes.ADD_ITEM_TO_CARD,
+        type: actionTypes.ADD_ITEM_TO_STATE_CART,
         payload: newItem
     }
 }

@@ -14,6 +14,7 @@ export const GET_ALL_RECORDS_FOR_LANDIN_GPAGE = gql`
 export const GET_PRODUCT_INFO_FOR_DETAILS = gql`
     query GetOneRecord($recordId: ID!) {
         record(id: $recordId) {
+            _id
             name
             category
             creatorArtist,

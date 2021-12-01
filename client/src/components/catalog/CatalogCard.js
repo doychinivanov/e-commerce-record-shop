@@ -10,20 +10,21 @@ import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
 import { getUserToken } from '../../api/apiUtils';
 
-import { ADD_TO_FAVORITES } from '../../graphql/mutations';
-import { REMOVE_FROM_FAVORITES } from '../../graphql/mutations';
-import { updateUserFavorites } from '../../redux/user/user-actions';
+import { REMOVE_FROM_FAVORITES, ADD_ITEM_TO_CART, ADD_TO_FAVORITES } from '../../graphql/mutations';
+import { updateUserFavorites, addToCart } from '../../redux/user/user-actions';
 
 
 import { Grid } from "@mui/material";
 
 import styles from './CatalogCard.module.css';
 
-const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavorites, userHasThisRecord }) => {
+const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavorites, userHasThisRecord, addToCartInState }) => {
 
     const [addToFavs, {}] = useMutation(ADD_TO_FAVORITES);
 
     const [removeFromFavs, {}] = useMutation(REMOVE_FROM_FAVORITES);
+
+    const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
 
     const addToFavorite = async () => {
         if (!userId) {
@@ -55,6 +56,16 @@ const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavor
             })
     }
 
+    const addToCart = async () => {
+        const idToken = await getUserToken();
+
+        mutateCart({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
+            .then(({data}) => {
+                addToCartInState(data.addRecordToCart)
+            })
+            .catch(err => toast.error(err.message));
+    }
+
 return (
     <Grid item xs={2} sm={4} md={3}>
 
@@ -67,7 +78,7 @@ return (
 
             <div className={styles.info}>
 
-                <div className={styles.icon}>
+                <div onClick={addToCart} className={styles.icon}>
                     <ShoppingCartOutlinedIcon />
                 </div>
 
@@ -90,7 +101,8 @@ return (
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateUserFavorites: (userData) => dispatch(updateUserFavorites(userData))
+        updateUserFavorites: (userData) => dispatch(updateUserFavorites(userData)),
+        addToCartInState: (newItem) => dispatch(addToCart(newItem))
     }
 }
 
