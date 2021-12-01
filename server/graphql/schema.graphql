@@ -1,6 +1,7 @@
 type Query {
     users: [User]
     user(email: String!): User
+    userCart(userId: ID!): [ItemCart]
     records: [Record]
     recordsByOldestToNewest: [Record]
     recordsByNewestToOldest: [Record]

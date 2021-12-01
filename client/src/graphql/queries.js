@@ -43,13 +43,28 @@ export const GET_USER_BY_EMAIL = gql`
             cart {
                 _id
                 quantity
-                 record {
-                    name
-                    price
-                    imageUrl
-                    _id
-                }
+                #  record {
+                #     name
+                #     price
+                #     imageUrl
+                #     _id
+                # }
     }
         }
     }
 `
+
+export const GET_USER_CART = gql`
+    query($userId: ID!){
+        userCart(userId: $userId) {
+            record {
+                name
+                price
+                imageUrl
+                _id
+            }
+            _id
+            quantity
+ } 
+}
+`;

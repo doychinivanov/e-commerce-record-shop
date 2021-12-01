@@ -7,7 +7,7 @@ import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 
-const Navigation = ({user, menuId, handleProfileMenuOpen, classes }) => {
+const Navigation = ({ user, menuId, handleProfileMenuOpen, classes }) => {
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -24,15 +24,17 @@ const Navigation = ({user, menuId, handleProfileMenuOpen, classes }) => {
         </Link>
 
 
+        <Link to='/cart'>
+          <IconButton
+            size="large"
+            color="inherit"
+          >
+            <Badge badgeContent={user.cart.reduce((acc, cur) => acc + cur.quantity, 0)} color="error">
+              <ShoppingCartOutlinedIcon />
+            </Badge>
+          </IconButton>
+        </Link>
 
-        <IconButton
-          size="large"
-          color="inherit"
-        >
-          <Badge badgeContent={user.cart.reduce((acc, cur) => acc + cur.quantity, 0)} color="error">
-            <ShoppingCartOutlinedIcon />
-          </Badge>
-        </IconButton>
 
         <IconButton
           size="large"

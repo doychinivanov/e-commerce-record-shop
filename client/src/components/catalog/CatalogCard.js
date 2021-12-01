@@ -61,7 +61,7 @@ const CatalogCard = ({ theme, record, userId = null, handleOpen, updateUserFavor
 
         mutateCart({ variables: { userId, recordId: record._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
-                addToCartInState(data.addRecordToCart)
+                addToCartInState(data.addRecordToCart);
             })
             .catch(err => toast.error(err.message));
     }

@@ -11,6 +11,10 @@ const resolvers = {
 
             return userService.getUserByEmail(email)
         },
+        userCart: async (_, {userId}, context) => {
+            // check if userId matches the id of currently logged user
+            return userService.getUserCart(userId);
+        },
         records: async () => recordService.getAllRecords(),
         record: async(_, {id}) => recordService.getRecordById(id),
         recordsByOldestToNewest: async() =>  recordService.getAllRecordsInDescByYear(),

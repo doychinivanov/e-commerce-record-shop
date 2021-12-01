@@ -21,8 +21,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user }) => {
 
         mutateCart({ variables: { userId: user._id, recordId: data.record._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
-                console.log(data);
-                addToCartInState(data.addRecordToCart)
+                addToCartInState(data.addRecordToCart);
             })
             .catch(err => toast.error(err.message));
     }

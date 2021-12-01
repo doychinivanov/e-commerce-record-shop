@@ -13,6 +13,7 @@ const CatalogList = ({theme, user, handleOpen}) => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);    
 
+
     if (error) {
         toast.error(error.message);
     }

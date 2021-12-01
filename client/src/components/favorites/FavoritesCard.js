@@ -38,7 +38,7 @@ const FavoritesCard = ({recordData, userId, theme, updateUserFavorites, addToCar
 
         mutateCart({ variables: { userId, recordId: recordData._id }, context: { headers: { 'x-authorization': idToken } } })
             .then(({data}) => {
-                addToCartInState(data.addRecordToCart)
+                addToCartInState(data.addRecordToCart);
             })
             .catch(err => toast.error(err.message));
     }
