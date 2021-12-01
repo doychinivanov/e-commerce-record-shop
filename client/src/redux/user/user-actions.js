@@ -20,12 +20,10 @@ export const updateUserFavorites = (updatedFavorites) => {
     }
 }
 
-export const addToCart = (itemId) => {
+export const addToCart = (newItem) => {
     return {
-        type: actionTypes.ADD_TO_CARD,
-        payload: {
-            _id: itemId
-        }
+        type: actionTypes.ADD_ITEM_TO_CARD,
+        payload: newItem
     }
 }
 

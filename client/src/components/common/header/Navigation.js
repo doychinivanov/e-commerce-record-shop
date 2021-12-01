@@ -7,7 +7,7 @@ import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 
-const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
+const Navigation = ({user, menuId, handleProfileMenuOpen, classes }) => {
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -16,7 +16,7 @@ const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
       <div className={classes.myComponent}>
 
         <Link to='/favorites'>
-          <IconButton size="large" aria-label="show 4 new mails">
+          <IconButton size="large">
             <Badge>
               <FavoriteBorderIcon />
             </Badge>
@@ -27,10 +27,9 @@ const Navigation = ({ menuId, handleProfileMenuOpen, classes }) => {
 
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={user.cart.reduce((acc, cur) => acc + cur.quantity, 0)} color="error">
             <ShoppingCartOutlinedIcon />
           </Badge>
         </IconButton>

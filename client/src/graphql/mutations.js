@@ -52,3 +52,18 @@ export const REMOVE_FROM_FAVORITES = gql`
         }
     }
 `;
+
+export const ADD_ITEM_TO_CART = gql`
+    mutation($userId: ID!, $recordId: ID!){
+        addRecordToCart(userId: $userId, recordId: $recordId) {
+            record {
+                _id
+                name
+                price
+                imageUrl
+            }
+            _id
+            quantity
+  }
+}
+`;

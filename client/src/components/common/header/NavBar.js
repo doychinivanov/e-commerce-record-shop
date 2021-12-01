@@ -99,7 +99,7 @@ const NavBar = ({ theme, user, open, handleOpen, handleClose }) => {
 
             {user ?
               <>
-                <Navigation menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes} />
+                <Navigation user={user} menuId={menuId} handleProfileMenuOpen={handleProfileMenuOpen} classes={classes} />
 
                 <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes} />
               </>
