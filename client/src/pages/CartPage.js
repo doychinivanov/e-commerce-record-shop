@@ -1,7 +1,7 @@
 import { useColorMode } from "../contexts/ColorModeCtx";
 
 import NavBar from '../components/common/header/NavBar';
-import Cart from "../components/cart/Cart";
+import CartParent from "../components/cart/CartParent";
 import Footer from '../components/common/footer/Footer';
 
 const CartPage = () => {
@@ -11,7 +11,7 @@ const CartPage = () => {
         <>
             <NavBar theme={theme}/>
             <div style={{ 'paddingTop': 50, 'paddingBottom': 15}}>
-                <Cart theme={theme}/>
+                <CartParent theme={theme}/>
             </div>
             <Footer theme={theme}/>
         </>

@@ -16,6 +16,7 @@ type Mutation {
     removeRecordFromFavorites(userId: ID!, recordId: ID!): User!
     addRecordToCart(userId: ID!, recordId: ID!): ItemCart!
     removeFromCart(userId: ID!, recordId: ID!): ItemCart!
+    updateItemQuanityInCart(userId: ID!, cartItem: ID!, quantity: Int!): ItemCart!
 }
 
 type User {

@@ -51,6 +51,12 @@ const resolvers = {
             // if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.removeFromCart(userId, recordId);
+        },
+        updateItemQuanityInCart: (_, {userId, cartItem, quantity}, context) => {
+            // if(!context.authData) throw new Error('Unauthorized request!');
+
+            return userService.updateItemQuanityInCart(userId, cartItem, quantity);
+
         }
     },
     User: {

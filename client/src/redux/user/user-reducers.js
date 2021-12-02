@@ -29,7 +29,10 @@ const userReducer = (state = INITIAL_USER_STATE, action) => {
         case actionTypes.REMOVE_FROM_CARD:
             return {}
         case actionTypes.ADJUST_QUANTITY:
-            return {}    
+            return {
+                ...state,
+                cart: state.cart.map(item => item._id === action.payload._id ? {...item, quantity: action.payload.qty} : item)
+            }    
         default:
             return state;
     }

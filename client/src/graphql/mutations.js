@@ -67,3 +67,14 @@ export const ADD_ITEM_TO_CART = gql`
   }
 }
 `;
+
+export const UPDATE_CART_ITEM_QUANTITY = gql`
+    mutation($userId: ID!, $cartItem: ID!, $quantity: Int!){
+        updateItemQuanityInCart(userId: $userId, cartItem: $cartItem, quantity: $quantity) {
+            quantity
+            record {
+                name
+            }
+        }
+    }
+`;

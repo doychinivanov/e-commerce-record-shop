@@ -1,13 +1,34 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { useMutation } from '@apollo/client';
+
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from './CartItem.module.css';
 
-const CartItem = ({ item, theme }) => {
+import { getUserToken } from '../../api/apiUtils';
+import { adjustQty } from '../../redux/user/user-actions';
+import { UPDATE_CART_ITEM_QUANTITY } from '../../graphql/mutations';
+
+import styles from './CartItem.module.css';
+import { toast } from 'react-toastify';
+
+const CartItem = ({ item, theme, userId, adjustQty }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
     const [currentQty, setCurrentQty] = useState(item.quantity);
+
+    const [mutateQunatity, { error }] = useMutation(UPDATE_CART_ITEM_QUANTITY);
+
+    const updateQtyInDB = async () => {
+        const idToken = await getUserToken();
+
+        mutateQunatity({ variables: { userId, cartItem: item._id, quantity: currentQty }, context: { headers: { 'x-authorization': idToken } } })
+        .then(() => {
+            console.log('updated')
+        })
+        .catch(err => toast.error('Failed to update quantity'));
+    }
 
     return (
         <div className={styles['cart-item-holder']}>
@@ -32,10 +53,16 @@ const CartItem = ({ item, theme }) => {
                 <span>
                     Quantity: 
                     <input
-                    onKeyUp={() => setCurrentQty(oldState => oldState += 1)}
-                    onKeyDown={() => setCurrentQty(oldState => oldState -= 1)}
+                    onChange={(ev) => {
+                        const currentVal = Number(ev.target.value);
+
+                        setCurrentQty(currentVal);
+                        adjustQty(item._id, currentVal);
+                    }}
+                    onBlur={updateQtyInDB}
                     className={styles['quantity-input']}
-                    defaultValue={currentQty}
+                    value={currentQty}
+                    min="1"
                     type="number" />
                 </span>
 
@@ -56,4 +83,10 @@ const CartItem = ({ item, theme }) => {
     )
 }
 
-export default CartItem;
+const mapDispatchToProps = dispatch => {
+    return {
+        adjustQty: (itemId, newQty) => dispatch(adjustQty(itemId, newQty)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

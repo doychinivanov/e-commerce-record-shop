@@ -83,6 +83,18 @@ const removeFromCart = async (userId, recordId) => {
     return existingCartItem;
 }
 
+const updateItemQuanityInCart = async(userId, cartItemId, newQuantity) => {
+    if(newQuantity <= 0) throw new Error('Invalid quantity!');
+
+    const existingCartItem = await ItemCartSchema.findOne({_id: cartItemId, custumer: userId});
+
+    if(!existingCartItem) throw new Error('No such item in cart!');
+
+    existingCartItem.quantity = newQuantity;
+    
+    return existingCartItem.save();
+}
+
 const getUserCart = (userId) => ItemCartSchema.find({custumer: userId});
 
 
@@ -95,5 +107,6 @@ export default {
     removeRecordFromFavorites,
     addRecordToCart,
     getUserCart,
-    removeFromCart
+    removeFromCart,
+    updateItemQuanityInCart
 };
