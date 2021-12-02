@@ -7,18 +7,20 @@ import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { getUserToken } from '../../api/apiUtils';
-import { adjustQty } from '../../redux/user/user-actions';
-import { UPDATE_CART_ITEM_QUANTITY } from '../../graphql/mutations';
+import { adjustQty, removeFromCart } from '../../redux/user/user-actions';
+import { UPDATE_CART_ITEM_QUANTITY, DELTE_CART_ITEM } from '../../graphql/mutations';
 
 import styles from './CartItem.module.css';
 import { toast } from 'react-toastify';
 
-const CartItem = ({ item, theme, userId, adjustQty }) => {
+const CartItem = ({ item, theme, userId, adjustQty, removeItemFromCart }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
     const [currentQty, setCurrentQty] = useState(item.quantity);
 
-    const [mutateQunatity, { error }] = useMutation(UPDATE_CART_ITEM_QUANTITY);
+    const [mutateQunatity, {}] = useMutation(UPDATE_CART_ITEM_QUANTITY);
+
+    const [deleteCartItem, {}] = useMutation(DELTE_CART_ITEM);
 
     const updateQtyInDB = async () => {
         const idToken = await getUserToken();
@@ -28,6 +30,18 @@ const CartItem = ({ item, theme, userId, adjustQty }) => {
             console.log('updated')
         })
         .catch(err => toast.error('Failed to update quantity'));
+    }
+
+    const deleteItemFromCart = async () => {
+        const idToken = await getUserToken();
+
+        deleteCartItem({ variables: { cartItem: item._id, }, context: { headers: { 'x-authorization': idToken } } })
+        .then(({data}) => {
+            console.log(data.deleteItemFromCart)
+            removeItemFromCart(data.deleteItemFromCart._id);
+        })
+        .catch(err => toast.error('Failed to update quantity'));
+
     }
 
     return (
@@ -70,7 +84,7 @@ const CartItem = ({ item, theme, userId, adjustQty }) => {
                 <span>Price: {item.record.price}</span>
             </div>
 
-            <span className={styles['button-holder']}>
+            <span onClick={deleteItemFromCart} className={styles['button-holder']}>
                 <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                     <span style={{ color: buttonColor, display: 'flex' }}>
                         <DeleteIcon />
@@ -86,6 +100,7 @@ const CartItem = ({ item, theme, userId, adjustQty }) => {
 const mapDispatchToProps = dispatch => {
     return {
         adjustQty: (itemId, newQty) => dispatch(adjustQty(itemId, newQty)),
+        removeItemFromCart: (itemId) => dispatch(removeFromCart(itemId))
     }
 }
 

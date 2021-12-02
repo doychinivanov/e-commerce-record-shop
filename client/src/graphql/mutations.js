@@ -78,3 +78,14 @@ export const UPDATE_CART_ITEM_QUANTITY = gql`
         }
     }
 `;
+
+export const DELTE_CART_ITEM = gql`
+    mutation($cartItem: ID!){
+        deleteItemFromCart(cartItem: $cartItem) {
+            _id
+            record {
+                name
+            }
+        }
+    }
+`;

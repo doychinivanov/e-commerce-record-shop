@@ -83,6 +83,8 @@ const removeFromCart = async (userId, recordId) => {
     return existingCartItem;
 }
 
+const deleteItemFromCart = async (itemCartId) => ItemCartSchema.findByIdAndDelete(itemCartId);
+
 const updateItemQuanityInCart = async(userId, cartItemId, newQuantity) => {
     if(newQuantity <= 0) throw new Error('Invalid quantity!');
 
@@ -108,5 +110,6 @@ export default {
     addRecordToCart,
     getUserCart,
     removeFromCart,
-    updateItemQuanityInCart
+    updateItemQuanityInCart,
+    deleteItemFromCart
 };

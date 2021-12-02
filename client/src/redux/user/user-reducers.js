@@ -27,7 +27,10 @@ const userReducer = (state = INITIAL_USER_STATE, action) => {
                 cart: action.payload
             }    
         case actionTypes.REMOVE_FROM_CARD:
-            return {}
+            return {
+                ...state,
+                cart: state.cart.filter(item => item._id !== action.payload._id)
+            }
         case actionTypes.ADJUST_QUANTITY:
             return {
                 ...state,
