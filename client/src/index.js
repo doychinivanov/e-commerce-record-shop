@@ -7,9 +7,21 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import App from './App';
 import './index.css';
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
 const client = new ApolloClient({
   uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: defaultOptions,
 });
 
 ReactDOM.render(
