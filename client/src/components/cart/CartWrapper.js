@@ -8,7 +8,7 @@ import { addCartState } from "../../redux/user/user-actions";
 
 import Cart from "./Cart";
 
-const CartParent = ({theme, userId, loadCartToState}) => {
+const CartWrapper = ({theme, userId, loadCartToState}) => {
 
     const { loading, error, data } = useQuery(GET_USER_CART, { variables: { userId } });
 
@@ -36,4 +36,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartParent);
+export default connect(mapStateToProps, mapDispatchToProps)(CartWrapper);
