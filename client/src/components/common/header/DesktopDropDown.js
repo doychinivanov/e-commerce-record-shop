@@ -9,8 +9,8 @@ const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose, removeU
   
   const { logout } = useAuth();
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
     removeUserFromState();
     handleMenuClose();
   }
