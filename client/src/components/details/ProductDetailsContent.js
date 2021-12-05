@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
 
 import { addToCart } from '../../redux/user/user-actions';
+import { turnModalOn } from '../../redux/authModal/modal-actions';
 import { ADD_ITEM_TO_CART } from '../../graphql/mutations';
 import { getUserToken } from '../../api/apiUtils';
 
@@ -11,12 +12,18 @@ import { Grid, Button } from "@mui/material";
 
 import styles from './ProductDetailsContent.module.css';
 
-const ProductDetailsContent = ({theme, data, addToCartInState, user }) => {
+const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn }) => {
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
     const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
 
     const addToCart = async () => {
+
+        if (!user) {
+            toast.warning('You must be signed in.')
+            return turnModalOn();
+        }
+        
         const idToken = await getUserToken();
 
         mutateCart({ variables: { userId: user._id, recordId: data.record._id }, context: { headers: { 'x-authorization': idToken } } })
@@ -63,7 +70,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCartInState: (newItem) => dispatch(addToCart(newItem))
+        addToCartInState: (newItem) => dispatch(addToCart(newItem)),
+        turnModalOn: () => dispatch(turnModalOn())
     }
 }
 

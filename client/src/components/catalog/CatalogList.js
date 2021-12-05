@@ -9,7 +9,7 @@ import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
 
 import CatalogCard from "./CatalogCard";
 
-const CatalogList = ({theme, user, handleOpen}) => {
+const CatalogList = ({theme, user}) => {
 
     const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE);    
 
@@ -50,7 +50,6 @@ const CatalogList = ({theme, user, handleOpen}) => {
                             theme={theme}
                             record={record}
                             userId={user?._id}
-                            handleOpen={handleOpen}
                             userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
                             />)
                     }

@@ -15,7 +15,9 @@ import ThreeDotsButton from './ThreeDotsButton';
 import SignButton from './SignButton';
 import AuthModal from '../../modals/AuthModal';
 
-const NavBar = ({ theme, user, open, handleOpen, handleClose }) => {
+import { turnModalOn, turnModalOff } from '../../../redux/authModal/modal-actions';
+
+const NavBar = ({ theme, user, authModal, turnModalOn, turnModalOff }) => {
 
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
@@ -103,7 +105,7 @@ const NavBar = ({ theme, user, open, handleOpen, handleClose }) => {
 
                 <ThreeDotsButton mobileMenuId={mobileMenuId} handleMobileMenuOpen={handleMobileMenuOpen} classes={classes} />
               </>
-              : <SignButton handleOpen={handleOpen} theme={theme} textColor={textColor} />
+              : <SignButton handleOpen={turnModalOn} theme={theme} textColor={textColor} />
             }
 
           </Toolbar>
@@ -113,15 +115,23 @@ const NavBar = ({ theme, user, open, handleOpen, handleClose }) => {
         {renderMenu}
       </Box>
 
-      <AuthModal open={open} handleClose={handleClose} theme={theme} />
+      <AuthModal open={authModal.isOn} handleClose={turnModalOff} theme={theme} />
     </>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    authModal: state.authModal
   }
 }
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = dispatch => {
+  return {
+    turnModalOn: () => dispatch(turnModalOn()),
+    turnModalOff: () => dispatch(turnModalOff())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
