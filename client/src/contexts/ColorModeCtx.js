@@ -1,12 +1,15 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { connect } from 'react-redux';
 import { createTheme, ThemeProvider } from "@mui/material";
 import { orange, grey, deepOrange } from '@mui/material/colors';
+
+import { changeTheme } from '../redux/theme/theme-actions';
 
 const ColorModeCtx = React.createContext();
 
 export const useColorMode = () => useContext(ColorModeCtx)
 
-export const ColorModeProvider = ({ children }) => {
+const ColorModeProvider = ({ children, currentMode, changeTheme }) => {
 
     const getDesignTokens = (mode) => ({
         palette: {
@@ -41,18 +44,18 @@ export const ColorModeProvider = ({ children }) => {
         },
       });
 
-    const [mode, setMode] = useState('light');
+    // const [mode, setMode] = useState('light');
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
-                setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+              changeTheme();
             },
         }),
-        [],
+        [changeTheme],
     );
 
     // Update the theme only if the mode changes
-    const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+    const theme = useMemo(() => createTheme(getDesignTokens(currentMode)), [currentMode]);
 
     const value = {colorMode, theme}
     return (
@@ -63,3 +66,18 @@ export const ColorModeProvider = ({ children }) => {
         </ColorModeCtx.Provider>
     );
 }
+
+
+const mapStateToProps = state => {
+  return {
+    currentMode: state.mode.mode
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeTheme: () => dispatch(changeTheme()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorModeProvider);

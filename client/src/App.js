@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 
-import { ColorModeProvider } from './contexts/ColorModeCtx'
+import ColorModeProvider from './contexts/ColorModeCtx'
 import { AuthProvider } from './contexts/AuthCtx';
 import { store, persistor } from './redux/store';
 
