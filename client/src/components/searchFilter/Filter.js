@@ -29,15 +29,15 @@ const Filter = ({theme}) => {
                             label="Category"
                             onChange={handleChange}
                         >
-                            <MenuItem value='all'>All</MenuItem>
-                            <MenuItem value='pop'>Pop</MenuItem>
-                            <MenuItem value="jazz">Jazz</MenuItem>
-                            <MenuItem value="classical rock">Classical Rock</MenuItem>
-                            <MenuItem value="metal">Metal</MenuItem>
-                            <MenuItem value="classical">Classical</MenuItem>
-                            <MenuItem value="hard rock">Hard Rock</MenuItem>
-                            <MenuItem value="indie rock">Indie Rock</MenuItem>
-                            <MenuItem value="blues">Blues</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value='all'>All</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value='pop'>Pop</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="jazz">Jazz</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="classical rock">Classical Rock</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="metal">Metal</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="classical">Classical</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="hard rock">Hard Rock</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="indie rock">Indie Rock</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="blues">Blues</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -52,8 +52,8 @@ const Filter = ({theme}) => {
                             label="Category"
                             onChange={handleSortChange}
                         >
-                            <MenuItem value='newest'>By Newest</MenuItem>
-                            <MenuItem value="oldest">By Oldest</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value='newest'>By Newest</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="oldest">By Oldest</MenuItem>
 
                         </Select>
                     </FormControl>
