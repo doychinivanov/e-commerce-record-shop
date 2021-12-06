@@ -1,19 +1,7 @@
-import { useState } from "react";
 import { Grid, Container, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 
-const Filter = ({theme}) => {
-
-    const [category, setCategory] = useState('all');
-    const [sortType, setSortType] = useState('');
-
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const handleSortChange = (event) => {
-        setSortType(event.target.value);
-    };
+const Filter = ({theme, category, sortType, handleCategoryChange, handleSortChange}) => {
 
     return (
         <div style={{ 'paddingTop': 90, backgroundColor: theme.palette.background.primary }}>
@@ -27,7 +15,7 @@ const Filter = ({theme}) => {
                             id="demo-simple-select"
                             value={category}
                             label="Category"
-                            onChange={handleChange}
+                            onChange={handleCategoryChange}
                         >
                             <MenuItem sx={{width: '100%'}} value='all'>All</MenuItem>
                             <MenuItem sx={{width: '100%'}} value='pop'>Pop</MenuItem>

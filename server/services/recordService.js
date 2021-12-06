@@ -1,7 +1,9 @@
 import RecordSchema from '../models/Record.js';
 
-const getAllRecords = () => {
-    return RecordSchema.find({});
+const getAllRecords = (desiredCategory) => {
+    if(desiredCategory === 'all') return RecordSchema.find({});
+
+    return RecordSchema.find({category: desiredCategory});
 }
 
 const getRecordById = (recordId) => {
