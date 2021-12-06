@@ -19,7 +19,7 @@ const LandingPage = () => {
         <>
             <NavBar theme={theme} />
             {!searchQuery ? <CarouselConveyer theme={theme} /> : null}
-            <CatalogList theme={theme} />
+            <CatalogList theme={theme} searchQuery={searchQuery} />
             {!searchQuery ? <Newsletter theme={theme} /> : null}
             <Footer theme={theme} />
         </>

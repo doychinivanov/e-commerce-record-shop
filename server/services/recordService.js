@@ -1,9 +1,14 @@
 import RecordSchema from '../models/Record.js';
 
-const getAllRecords = (desiredCategory) => {
-    if(desiredCategory === 'all') return RecordSchema.find({});
+const getAllRecords = (desiredCategory, query) => {
 
-    return RecordSchema.find({category: desiredCategory});
+    if(desiredCategory === 'all' && !query) return RecordSchema.find({});
+
+    if(desiredCategory === 'all' && query) return RecordSchema.find({$or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
+
+    if(desiredCategory !== 'all' && query) return RecordSchema.find({category: desiredCategory, $or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
+
+    if(desiredCategory !== 'all' && !query) return RecordSchema.find({category: desiredCategory});
 }
 
 const getRecordById = (recordId) => {

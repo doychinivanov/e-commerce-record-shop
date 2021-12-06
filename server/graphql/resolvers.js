@@ -15,7 +15,7 @@ const resolvers = {
             // check if userId matches the id of currently logged user
             return userService.getUserCart(userId);
         },
-        records: async (_, {category}) => recordService.getAllRecords(category),
+        records: async (_, {category, query}) => recordService.getAllRecords(category, query),
         record: async(_, {id}) => recordService.getRecordById(id),
         recordsByOldestToNewest: async() =>  recordService.getAllRecordsInDescByYear(),
         recordsByNewestToOldest: async() => recordService.getAllRecordsInAscByYear(),

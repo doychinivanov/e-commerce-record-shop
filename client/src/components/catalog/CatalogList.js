@@ -11,19 +11,11 @@ import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
 import CatalogCard from "./CatalogCard";
 import Filter from "../searchFilter/Filter";
 
-const CatalogList = ({ theme, user }) => {
+const CatalogList = ({ theme, user, searchQuery }) => {
     const [category, setCategory] = useState('all');
     const [sortType, setSortType] = useState('');
 
-    const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category } });
-
-    // const handleCategoryChange = useCallback(() =>(event) => {
-    //     setCategory(event.target.value);
-    // }, []);
-
-    // const handleSortChange = useCallback(() => (event) => {
-    //     setSortType(event.target.value);
-    // }, [] );
+    const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery } });
 
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
