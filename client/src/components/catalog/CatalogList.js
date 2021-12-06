@@ -38,6 +38,10 @@ const CatalogList = ({ theme, user }) => {
             data.records.sort((record1, record2) => record1.year - record2.year);
         } else if (sortType === 'newest') {
             data.records.sort((record1, record2) => record2.year - record1.year);
+        } else if (sortType === 'cheap') {
+            data.records.sort((record1, record2) => record1.price - record2.price);
+        } else if (sortType === 'expensive') {
+            data.records.sort((record1, record2) => record2.price - record1.price);
         }
     }
 

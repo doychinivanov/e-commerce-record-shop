@@ -8,6 +8,7 @@ export const GET_ALL_RECORDS_FOR_LANDIN_GPAGE = gql`
             imageUrl
             _id
             year
+            price
         }
 }
 `;

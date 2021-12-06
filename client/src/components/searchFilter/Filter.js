@@ -42,6 +42,8 @@ const Filter = ({theme, category, sortType, handleCategoryChange, handleSortChan
                         >
                             <MenuItem sx={{width: '100%'}} value='newest'>By Newest</MenuItem>
                             <MenuItem sx={{width: '100%'}} value="oldest">By Oldest</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="cheap">By Price Asc</MenuItem>
+                            <MenuItem sx={{width: '100%'}} value="expensive">By Price Desc</MenuItem>
 
                         </Select>
                     </FormControl>
