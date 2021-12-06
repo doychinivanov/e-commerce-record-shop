@@ -7,16 +7,20 @@ import Newsletter from "../components/newsletter/Newsletter";
 import Footer from "../components/common/footer/Footer";
 
 import { useColorMode } from "../contexts/ColorModeCtx";
+import { useSearchParams  } from "react-router-dom";
 
 const LandingPage = () => {
     const {theme} = useColorMode();
+    const [searchParams] = useSearchParams();
+
+    const searchQuery = searchParams.get('query');
 
     return (
         <>
             <NavBar theme={theme} />
-            <CarouselConveyer theme={theme} />
+            {!searchQuery ? <CarouselConveyer theme={theme} /> : null}
             <CatalogList theme={theme} />
-            <Newsletter theme={theme} />
+            {!searchQuery ? <Newsletter theme={theme} /> : null}
             <Footer theme={theme} />
         </>
     )
