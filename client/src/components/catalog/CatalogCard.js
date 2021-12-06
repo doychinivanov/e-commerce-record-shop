@@ -73,7 +73,7 @@ const CatalogCard = ({ theme, record, userId = null, turnModalOn, updateUserFavo
     }
 
     return (
-        <Grid item xs={2} sm={4} md={3}>
+        <Grid item xs={2} sm={4} md={4} lg={3} xl={2} >
 
             <div className={styles.container} style={{ backgroundColor: theme.palette.background.primary }}>
                 <div className={styles.circle}>
