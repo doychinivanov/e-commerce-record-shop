@@ -30,6 +30,7 @@ const resolvers = {
             if(!context.authData) throw new Error('Failed to register!');
 
             addCustomerRole(context.authData.uid)
+            // addAdminRole(context.authData.uid);
             return userService.createUser({email, fullName});
         },
         addRecordToFavorites: (_, {userId, recordId}, context) => {

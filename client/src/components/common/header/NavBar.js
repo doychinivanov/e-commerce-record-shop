@@ -18,7 +18,6 @@ import AuthModal from '../../modals/AuthModal';
 import { turnModalOn, turnModalOff } from '../../../redux/authModal/modal-actions';
 
 const NavBar = ({ theme, user, authModal, turnModalOn, turnModalOff }) => {
-
   const textColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
   const useStyles = makeStyles({

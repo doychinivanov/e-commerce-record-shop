@@ -7,11 +7,15 @@ import { Grid, Container, Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { GET_ALL_RECORDS_FOR_LANDIN_GPAGE } from '../../graphql/queries';
+import { useAuth } from '../../contexts/AuthCtx';
 
 import CatalogCard from "./CatalogCard";
+import CatalogAddNewCard from './CatalogAddNewCard';
 import Filter from "../searchFilter/Filter";
 
 const CatalogList = ({ theme, user, searchQuery }) => {
+    const { userRole } = useAuth();
+
     const [category, setCategory] = useState('all');
     const [sortType, setSortType] = useState('');
 
@@ -78,6 +82,8 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                                 userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
                             />)
                         }
+
+                        {userRole === 'admin' ? <CatalogAddNewCard theme={theme} /> : null}
 
                     </Grid >
                 </Container>
