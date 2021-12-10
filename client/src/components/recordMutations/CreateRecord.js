@@ -1,5 +1,7 @@
 import { Grid, Container, Box } from "@mui/material";
 
+import RecordForm from "./RecordForm";
+
 const CreateRecord = ({ theme }) => {
   const textColor =
     theme.palette.mode === "dark"
@@ -17,7 +19,7 @@ const CreateRecord = ({ theme }) => {
     >
       <Container fixed>
         <Box sx={{ flexGrow: 1 }}>
-          <h1>Time to create</h1>
+          <RecordForm />
         </Box>
       </Container>
     </div>
