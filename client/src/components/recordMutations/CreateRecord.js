@@ -18,7 +18,7 @@ const CreateRecord = ({ theme }) => {
       }}
     >
       <Container fixed>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} display="flex" alignItems="center" justifyContent="center">
           <RecordForm />
         </Box>
       </Container>

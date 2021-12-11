@@ -1,11 +1,11 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 
-const CategoryDropDown = ({category, handleCategoryChange, variant}) =>{
+const CategoryDropDown = ({category, handleCategoryChange, variant, error}) =>{
 
     return (
         <FormControl fullWidth>
-            <InputLabel variant={variant} id="demo-simple-select-label">Category</InputLabel>
+            <InputLabel variant={variant} id="demo-simple-select-label" error={error}>Category</InputLabel>
             <Select
               variant={variant}
               labelId="demo-simple-select-label"
@@ -13,6 +13,7 @@ const CategoryDropDown = ({category, handleCategoryChange, variant}) =>{
               value={category}
               label="Category"
               onChange={handleCategoryChange}
+              error={error}
             >
               <MenuItem sx={{ width: "100%" }} value="none">
                 {' '}
