@@ -62,6 +62,11 @@ const resolvers = {
             // if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.deleteItemFromCart(cartItem);
+        },
+        createNewRecord: (_, {name, year, creatorArtist, label, imageUrl, category, price, description}, context) => {
+            if(context.authData.role !== 'admin') throw new Error('Unauthorized!');
+
+            return recordService.createNewRecord({name, year, creatorArtist, label, imageUrl, category, price, description});
         }
     },
     User: {

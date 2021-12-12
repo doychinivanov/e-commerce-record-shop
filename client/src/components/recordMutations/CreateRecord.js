@@ -1,5 +1,8 @@
-import { Grid, Container, Box } from "@mui/material";
+import { useMutation } from "@apollo/client";
+import { Container, Box } from "@mui/material";
+import { toast } from "react-toastify";
 
+import { CREATE_NEW_RECORD } from "../../graphql/mutations";
 import RecordForm from "./RecordForm";
 
 const CreateRecord = ({ theme }) => {
@@ -8,6 +11,11 @@ const CreateRecord = ({ theme }) => {
       ? theme.palette.text.primary
       : theme.palette.text.secondary;
 
+  const [createNewRecordMutation, { error }] = useMutation(CREATE_NEW_RECORD);
+
+  if (error) toast.error(error.message);
+
+  
   return (
     <div
       style={{
@@ -18,8 +26,13 @@ const CreateRecord = ({ theme }) => {
       }}
     >
       <Container fixed>
-        <Box sx={{ flexGrow: 1 }} display="flex" alignItems="center" justifyContent="center">
-          <RecordForm />
+        <Box
+          sx={{ flexGrow: 1 }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <RecordForm mutationFunction={createNewRecordMutation} />
         </Box>
       </Container>
     </div>

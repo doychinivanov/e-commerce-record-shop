@@ -1,19 +1,17 @@
 import { useState, useCallback } from "react";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-  TextField,
-} from "@mui/material";
+import { FormControl, Button, TextField } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 import { makeStyles } from "@mui/styles";
 
+import { getUserToken } from "../../api/apiUtils";
 import CategoryDropDown from "../searchFilter/CategoryDropDown";
+import MutateRecordInput from "./MutateRecordInput";
 
-const RecordForm = () => {
+const RecordForm = ({ mutationFunction }) => {
   const useStyles = makeStyles({
     formStyle: {
       "& .MuiFormControl-root": {
@@ -27,6 +25,8 @@ const RecordForm = () => {
   });
 
   const classes = useStyles();
+  const storage = getStorage();
+  const navigate = useNavigate();
 
   const [recordName, setRecordName] = useState("");
   const [artist, setArtist] = useState("");
@@ -35,6 +35,7 @@ const RecordForm = () => {
   const [label, setLabel] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [imgFile, setImgFile] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,6 +58,12 @@ const RecordForm = () => {
   };
 
   const allFieldsAreValid = () => {
+    if(!imgFile) {
+      toast.error("Please, upload an image!");
+
+      return false;
+    }
+
     if (!recordName.trim() || recordName.trim().length < 2) {
       setWrongRecordName(true);
       toast.error("Invalid record name!");
@@ -92,16 +99,16 @@ const RecordForm = () => {
       return false;
     }
 
-    if (!price.trim() || price <= 0) {
+    if (!price || price <= 0) {
       setWrongPrice(true);
       toast.error("Price can't be less or equal to zero");
 
       return false;
     }
 
-    if (!description.trim() || description.trim().length < 15) {
+    if (!description.trim() || description.trim().length < 20) {
       setWrongDescription(true);
-      toast.error("Provide a description with at least 15 characters!");
+      toast.error("Provide a description with at least 20 characters!");
 
       return false;
     }
@@ -113,22 +120,55 @@ const RecordForm = () => {
     setCategory(ev.target.value);
   }, []);
 
-  const submitCreateForm = () => {
+  const uploadToLocalState = (ev) => {
+    const allowedTypes = ['image/png', 'image/jpeg', ]
+    const currentFile = ev.target.files[0];
+
+    if (currentFile && allowedTypes.includes(currentFile.type)) {
+      setImgFile(currentFile);
+    } else {
+      setImgFile(null);
+      toast.error('Please select a valid image file.');
+    }
+  };
+
+  const submitCreateForm = async () => {
     resetErrors();
 
     if (!allFieldsAreValid()) return;
 
-    setIsLoading(true);
+    const storageRef = ref(storage, `images/${imgFile.name}`);
 
-    console.log("form sent");
+    setIsLoading(true);
+    const loadingToastID = toast.loading("New record is being created...");
+    const idToken = await getUserToken();
+
+    await uploadBytes(storageRef, imgFile);
+    const url = await getDownloadURL(storageRef);
+
+    const { data } = await mutationFunction({
+      variables: {
+        name: recordName,
+        year,
+        creatorArtist: artist,
+        label,
+        imageUrl: url,
+        category,
+        price,
+        description,
+      },
+      context: { headers: { "x-authorization": idToken } },
+    });
 
     setIsLoading(false);
+    toast.update(loadingToastID, { render: "Succesfully created.", type: "success", isLoading: false, autoClose: 3000 });
+    navigate(`/products/${data.createNewRecord._id}`);
   };
 
   return (
     <div className={classes.formStyle}>
       <FormControl>
-        <span>
+        <span style={{ marginBottom: 25 }}>
           <FormControl>
             <input
               accept="image/*"
@@ -137,6 +177,7 @@ const RecordForm = () => {
               id="raised-button-file"
               multiple
               type="file"
+              onChange={uploadToLocalState}
             />
             <label htmlFor="raised-button-file">
               <Button
@@ -148,55 +189,38 @@ const RecordForm = () => {
               </Button>
             </label>
           </FormControl>
+          {imgFile ? <span>{imgFile.name}</span> : null}
         </span>
 
-        <span>
-          <FormControl>
-            <InputLabel htmlFor="title-input" error={wrongRecordName}>
-              Record Title
-            </InputLabel>
-            <Input
-              onChange={(ev) => setRecordName(ev.target.value)}
-              id="title-input"
-              value={recordName}
-              error={wrongRecordName}
-              disabled={isLoading}
-            />
-          </FormControl>
-        </span>
+        <MutateRecordInput
+          labelText="Record Title"
+          isWrong={wrongRecordName}
+          handleInputChange={(ev) => setRecordName(ev.target.value)}
+          isLoading={isLoading}
+          inputValue={recordName}
+          inputType="text"
+          id="title-input"
+        />
 
-        <span style={{ marginTop: 25 }}>
-          <FormControl>
-            <InputLabel htmlFor="artist-input" error={wrongArtist}>
-              Artist
-            </InputLabel>
+        <MutateRecordInput
+          labelText="Artist"
+          isWrong={wrongArtist}
+          handleInputChange={(ev) => setArtist(ev.target.value)}
+          isLoading={isLoading}
+          inputValue={artist}
+          inputType="text"
+          id="artist-input"
+        />
 
-            <Input
-              onChange={(ev) => setArtist(ev.target.value)}
-              id="artist-input"
-              value={artist}
-              error={wrongArtist}
-              disabled={isLoading}
-            />
-          </FormControl>
-        </span>
-
-        <span style={{ marginTop: 25 }}>
-          <FormControl>
-            <InputLabel htmlFor="year-input" error={wrongYear}>
-              Year
-            </InputLabel>
-
-            <Input
-              onChange={(ev) => setYear(ev.target.value)}
-              id="year-input"
-              type="number"
-              value={year}
-              error={wrongYear}
-              disabled={isLoading}
-            />
-          </FormControl>
-        </span>
+        <MutateRecordInput
+          labelText="Year"
+          isWrong={wrongYear}
+          handleInputChange={(ev) => setYear(Number(ev.target.value))}
+          isLoading={isLoading}
+          inputValue={year}
+          inputType="number"
+          id="year-input"
+        />
 
         <span style={{ marginTop: 25 }}>
           <CategoryDropDown
@@ -207,38 +231,25 @@ const RecordForm = () => {
           />
         </span>
 
-        <span style={{ marginTop: 25 }}>
-          <FormControl>
-            <InputLabel htmlFor="label-input" error={wrongLabel}>
-              Record Label
-            </InputLabel>
+        <MutateRecordInput
+          labelText="Record Label"
+          isWrong={wrongLabel}
+          handleInputChange={(ev) => setLabel(ev.target.value)}
+          isLoading={isLoading}
+          inputValue={label}
+          inputType="text"
+          id="label-input"
+        />
 
-            <Input
-              onChange={(ev) => setLabel(ev.target.value)}
-              id="label-input"
-              value={label}
-              error={wrongLabel}
-              disabled={isLoading}
-            />
-          </FormControl>
-        </span>
-
-        <span style={{ marginTop: 25 }}>
-          <FormControl>
-            <InputLabel htmlFor="price-input" error={wrongPrice}>
-              Price
-            </InputLabel>
-
-            <Input
-              onChange={(ev) => setPrice(ev.target.value)}
-              id="price-input"
-              type="number"
-              value={price}
-              error={wrongPrice}
-              disabled={isLoading}
-            />
-          </FormControl>
-        </span>
+        <MutateRecordInput
+          labelText="Price"
+          isWrong={wrongPrice}
+          handleInputChange={(ev) => setPrice(Number(ev.target.value))}
+          isLoading={isLoading}
+          inputValue={price}
+          inputType="number"
+          id="price-input"
+        />
 
         <span style={{ marginTop: 25 }}>
           <FormControl>
