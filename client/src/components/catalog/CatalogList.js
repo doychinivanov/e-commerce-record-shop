@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -79,6 +79,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                                 theme={theme}
                                 record={record}
                                 userId={user?._id}
+                                userRole={userRole}
                                 userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
                             />)
                         }
