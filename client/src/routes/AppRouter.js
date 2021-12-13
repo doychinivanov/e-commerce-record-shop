@@ -5,6 +5,7 @@ import ProductPage from '../pages/ProductPage';
 import FavoritesPage from '../pages/FavoritesPage';
 import CartPage from '../pages/CartPage';
 import CreateRecordPage from '../pages/CreateRecordPage';
+import EditRecordPage from '../pages/EditRecordPage';
 
 import IsAuth from '../components/guards/IsAuth';
 import IsAdmin from '../components/guards/IsAdmin';
@@ -20,6 +21,7 @@ const AppRouter = () => {
             </Route>
             <Route element={<IsAdmin/>}>
                 <Route exact path='/create' element={<CreateRecordPage />} />
+                <Route exact path='/edit/:id' element={<EditRecordPage />} />
             </Route>
         </Routes>
     )

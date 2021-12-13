@@ -11,7 +11,7 @@ import { getUserToken } from "../../api/apiUtils";
 import CategoryDropDown from "../searchFilter/CategoryDropDown";
 import MutateRecordInput from "./MutateRecordInput";
 
-const RecordForm = ({ mutationFunction }) => {
+const RecordForm = ({ mutationFunction, recordInfo, type }) => {
   const useStyles = makeStyles({
     formStyle: {
       "& .MuiFormControl-root": {
@@ -28,13 +28,14 @@ const RecordForm = ({ mutationFunction }) => {
   const storage = getStorage();
   const navigate = useNavigate();
 
-  const [recordName, setRecordName] = useState("");
-  const [artist, setArtist] = useState("");
-  const [year, setYear] = useState("");
-  const [category, setCategory] = useState("none");
-  const [label, setLabel] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+  const [recordName, setRecordName] = useState(recordInfo?.name);
+  const [artist, setArtist] = useState(recordInfo?.creatorArtist);
+  const [year, setYear] = useState(recordInfo?.year);
+  const [category, setCategory] = useState(recordInfo?.category ? recordInfo.category : "none");
+  const [label, setLabel] = useState(recordInfo?.label);
+  const [price, setPrice] = useState(recordInfo?.price);
+  const [description, setDescription] = useState(recordInfo?.description);
+  const [imageUrl, setIamgeUrl] = useState(recordInfo?.imageUrl);
   const [imgFile, setImgFile] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +59,7 @@ const RecordForm = ({ mutationFunction }) => {
   };
 
   const allFieldsAreValid = () => {
-    if(!imgFile) {
+    if(!imgFile && !imageUrl) {
       toast.error("Please, upload an image!");
 
       return false;
@@ -133,18 +134,25 @@ const RecordForm = ({ mutationFunction }) => {
   };
 
   const submitCreateForm = async () => {
+    const loadingMsg = type === 'edit' ? "Updating record in process..." : "New record is being created...";
+    const resolvedMsg = type === 'edit' ? "Succesfully updated." : "Succesfully created.";
+    
     resetErrors();
 
     if (!allFieldsAreValid()) return;
 
-    const storageRef = ref(storage, `images/${imgFile.name}`);
-
     setIsLoading(true);
-    const loadingToastID = toast.loading("New record is being created...");
+    const loadingToastID = toast.loading(loadingMsg);
     const idToken = await getUserToken();
+    
+    let url = imageUrl;
+    
+    if (imgFile) {
+      const storageRef = ref(storage, `images/${imgFile.name}`);
+      await uploadBytes(storageRef, imgFile);
+      url = await getDownloadURL(storageRef);
+    }
 
-    await uploadBytes(storageRef, imgFile);
-    const url = await getDownloadURL(storageRef);
 
     const { data } = await mutationFunction({
       variables: {
@@ -156,13 +164,14 @@ const RecordForm = ({ mutationFunction }) => {
         category,
         price,
         description,
+        recordId: recordInfo?._id
       },
       context: { headers: { "x-authorization": idToken } },
     });
 
     setIsLoading(false);
-    toast.update(loadingToastID, { render: "Succesfully created.", type: "success", isLoading: false, autoClose: 3000 });
-    navigate(`/products/${data.createNewRecord._id}`);
+    toast.update(loadingToastID, { render: resolvedMsg, type: "success", isLoading: false, autoClose: 3000 });
+    navigate(`/products/${recordInfo?._id || data.createNewRecord._id}`);
   };
 
   return (
@@ -268,7 +277,7 @@ const RecordForm = ({ mutationFunction }) => {
         </span>
 
         <Button onClick={submitCreateForm} sx={{ mt: 5 }}>
-          <span style={{ color: "#f5f5f5" }}>Create Record</span>
+          <span style={{ color: "#f5f5f5" }}>{type === 'edit' ? 'Edit Record' : 'Create Record'}</span>
         </Button>
       </FormControl>
     </div>

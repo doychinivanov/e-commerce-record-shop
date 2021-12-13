@@ -72,6 +72,11 @@ const resolvers = {
             if(context.authData.role !== 'admin') throw new Error('Unauthorized!');
 
             return recordService.deleteRecord(recordId);
+        },
+        updateRecord: (_, {recordId, name, year, creatorArtist, label, imageUrl, category, price, description}, context) => {
+            if(context.authData.role !== 'admin') throw new Error('Unauthorized!');
+
+            return recordService.updateRecord(recordId, {name, year, creatorArtist, label, imageUrl, category, price, description});
         }
     },
     User: {

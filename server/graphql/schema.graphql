@@ -20,6 +20,7 @@ type Mutation {
     deleteItemFromCart(cartItem: ID!): ItemCart!
     createNewRecord(name: String!, year: Int!, creatorArtist: String!, label: String!, imageUrl: String!, category: String!, price: Float!, description: String!): Record!
     deleteRecord(recordId: ID!): Record!
+    updateRecord(recordId: ID!, name: String!, year: Int!, creatorArtist: String!, label: String!, imageUrl: String!, category: String!, price: Float!, description: String!): Record!
 }
 
 type User {

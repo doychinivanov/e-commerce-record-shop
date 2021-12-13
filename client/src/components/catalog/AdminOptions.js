@@ -21,9 +21,11 @@ const AdminOptions = ({productId, theme, refetchData}) => {
 
   return (
     <div className={styles.info}>
+      <Link to={`/edit/${productId}`}>
       <div className={styles.icon}>
         <EditOutlinedIcon />
       </div>
+      </Link>
 
       <Link to={`/products/${productId}`}>
         <div className={styles.icon}>

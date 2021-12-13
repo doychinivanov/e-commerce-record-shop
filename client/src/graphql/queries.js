@@ -22,7 +22,9 @@ export const GET_PRODUCT_INFO_FOR_DETAILS = gql`
             creatorArtist,
             price,
             imageUrl,
-            description
+            description,
+            year,
+            label
         }
     }
 `;

@@ -127,3 +127,31 @@ export const DELETE_RECORD = gql`
     }
   }
 `;
+
+export const UPDATE_RECORD = gql`
+  mutation Mutation(
+    $recordId: ID!
+    $name: String!
+    $year: Int!
+    $creatorArtist: String!
+    $label: String!
+    $imageUrl: String!
+    $category: String!
+    $price: Float!
+    $description: String!
+  ) {
+    updateRecord(
+      recordId: $recordId
+      name: $name
+      year: $year
+      creatorArtist: $creatorArtist
+      label: $label
+      imageUrl: $imageUrl
+      category: $category
+      price: $price
+      description: $description
+    ) {
+      _id
+    }
+  }
+`;

@@ -32,11 +32,16 @@ const deleteRecord = async (recordId) => {
     return await RecordSchema.findByIdAndDelete(recordId);
 }
 
+const updateRecord = async (recordId, newRecordData) => {
+    return await RecordSchema.findByIdAndUpdate(recordId, newRecordData, {new: true});
+}
+
 export default {
     getAllRecords,
     getRecordById,
     getAllRecordsInDescByYear,
     getAllRecordsInAscByYear,
     createNewRecord,
-    deleteRecord
+    deleteRecord,
+    updateRecord
 };
