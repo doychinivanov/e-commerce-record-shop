@@ -52,8 +52,8 @@ const Footer = ({ theme }) => {
 
                                 <Grid item xs={4} sm={4}>
                                     <ul>
-                                        <li><Link to="/">Cart</Link></li>
-                                        <li><Link to="/">Favorites</Link></li>
+                                        <li><Link to="/cart">Cart</Link></li>
+                                        <li><Link to="/favorites">Favorites</Link></li>
                                         <li><Link to="/">My Profile</Link></li>
                                         <li><Link to="/">My Orders</Link></li>
                                         <li><Link to="/">Support</Link></li>

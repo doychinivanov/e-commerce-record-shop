@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
+import {Link} from 'react-router-dom';
 
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
+import { useAuth } from '../../contexts/AuthCtx';
 import { addToCart } from '../../redux/user/user-actions';
 import { turnModalOn } from '../../redux/authModal/modal-actions';
 import { ADD_ITEM_TO_CART } from '../../graphql/mutations';
@@ -13,6 +18,7 @@ import { Grid, Button } from "@mui/material";
 import styles from './ProductDetailsContent.module.css';
 
 const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn }) => {
+    const { userRole } = useAuth();
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
 
     const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
@@ -56,6 +62,28 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                             <span style={{ color: buttonColor }} className={styles['btn-content']}>Add to Cart</span>
                         </span>
                     </Button>
+
+                    {userRole
+                    ? 
+                    <>
+                    <Link style={{marginLeft: 15, marginRight: 15}} to={`/edit/${data.record._id}`}>
+                        <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
+                            <span style={{ color: buttonColor, display: 'flex' }}>
+                                <EditOutlinedIcon />
+                                <span style={{ color: buttonColor }} className={styles['btn-content']}>Edit</span>
+                            </span>
+                        </Button>
+                    </Link>
+
+                    <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
+                        <span style={{ color: buttonColor, display: 'flex' }}>
+                            <DeleteOutlineOutlinedIcon />
+                            <span style={{ color: buttonColor }} className={styles['btn-content']}>Delete</span>
+                        </span>
+                    </Button>
+                    </>
+                    : null
+                    }
                 </span>
             </Grid>
         </>
