@@ -19,7 +19,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
     const [category, setCategory] = useState('all');
     const [sortType, setSortType] = useState('');
 
-    const { loading, error, data } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery } });
+    const { loading, error, data, refetch  } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery } });
 
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
@@ -81,6 +81,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                                 userId={user?._id}
                                 userRole={userRole}
                                 userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
+                                refetchData={() => refetch()}
                             />)
                         }
 

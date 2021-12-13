@@ -28,12 +28,15 @@ const getAllRecordsInAscByYear = () => {
     return RecordSchema.find({}).sort({'year': 'asc'});
 }
 
-
+const deleteRecord = async (recordId) => {
+    return await RecordSchema.findByIdAndDelete(recordId);
+}
 
 export default {
     getAllRecords,
     getRecordById,
     getAllRecordsInDescByYear,
     getAllRecordsInAscByYear,
-    createNewRecord
+    createNewRecord,
+    deleteRecord
 };

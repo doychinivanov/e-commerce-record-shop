@@ -44,22 +44,22 @@ const resolvers = {
             return userService.removeRecordFromFavorites(userId, recordId)
         },
         addRecordToCart: (_, {userId, recordId}, context) => {
-            // if(!context.authData) throw new Error('Unauthorized request!');
+            if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.addRecordToCart(userId, recordId);
         },
         removeFromCart: (_, {userId, recordId}, context) => {
-            // if(!context.authData) throw new Error('Unauthorized request!');
+            if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.removeFromCart(userId, recordId);
         },
         updateItemQuanityInCart: (_, {userId, cartItem, quantity}, context) => {
-            // if(!context.authData) throw new Error('Unauthorized request!');
+            if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.updateItemQuanityInCart(userId, cartItem, quantity);
         },
         deleteItemFromCart: (_, {cartItem}, context) => {
-            // if(!context.authData) throw new Error('Unauthorized request!');
+            if(!context.authData) throw new Error('Unauthorized request!');
 
             return userService.deleteItemFromCart(cartItem);
         },
@@ -67,6 +67,11 @@ const resolvers = {
             if(context.authData.role !== 'admin') throw new Error('Unauthorized!');
 
             return recordService.createNewRecord({name, year, creatorArtist, label, imageUrl, category, price, description});
+        },
+        deleteRecord: (_, {recordId}, context) => {
+            if(context.authData.role !== 'admin') throw new Error('Unauthorized!');
+
+            return recordService.deleteRecord(recordId);
         }
     },
     User: {

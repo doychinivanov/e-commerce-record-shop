@@ -19,6 +19,7 @@ type Mutation {
     updateItemQuanityInCart(userId: ID!, cartItem: ID!, quantity: Int!): ItemCart!
     deleteItemFromCart(cartItem: ID!): ItemCart!
     createNewRecord(name: String!, year: Int!, creatorArtist: String!, label: String!, imageUrl: String!, category: String!, price: Float!, description: String!): Record!
+    deleteRecord(recordId: ID!): Record!
 }
 
 type User {

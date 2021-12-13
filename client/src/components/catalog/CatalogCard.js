@@ -11,6 +11,7 @@ const CatalogCard = ({
   userId = null,
   userRole,
   userHasThisRecord,
+  refetchData
 }) => {
   return (
     <Grid item xs={2} sm={4} md={4} lg={3} xl={2}>
@@ -23,7 +24,7 @@ const CatalogCard = ({
         <img src={record.imageUrl} alt="Record cover" />
 
         {userRole === "admin"
-        ? <AdminOptions productId={record._id} />
+        ? <AdminOptions productId={record._id} theme={theme} refetchData={refetchData} />
         : <CustomerOptions productId={record._id} userId={userId} userHasThisRecord={userHasThisRecord} />}
       </div>
     </Grid>

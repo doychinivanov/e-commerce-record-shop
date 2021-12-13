@@ -119,3 +119,11 @@ export const CREATE_NEW_RECORD = gql`
     }
   }
 `;
+
+export const DELETE_RECORD = gql`
+  mutation ($recordId: ID!) {
+    deleteRecord(recordId: $recordId) {
+      name
+    }
+  }
+`;
