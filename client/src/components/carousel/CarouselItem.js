@@ -1,14 +1,21 @@
 import { Paper, Button } from '@mui/material'
+import {Link} from 'react-router-dom';
 
 const CarouselItem = (props) => {
     return (
         <Paper style={{ 'textAlign': 'center'}}>
-            <img style={{maxHeight: 420, maxWidth: '100%'}} src={props.item.imageUrl} alt="Album Cover" />
-            <h2 style={{color: props.theme.palette.text.secondary}} >{props.item.name}</h2>
+            <Link to={`/products/${props.item._id}`}>
+                <img style={{maxHeight: 420, maxWidth: '100%'}} src={props.item.imageUrl} alt="Album Cover" />
+            </Link>
 
-            <Button className="CheckButton">
-                Check it out!
-            </Button>
+            <h2 style={{color: props.theme.palette.text.secondary}} >{props.item.creatorArtist}</h2>
+
+
+            <Link to={`/products/${props.item._id}`}>
+                <Button className="CheckButton">
+                    Check it out!
+                </Button>
+            </Link>
         </Paper>
     )
 }

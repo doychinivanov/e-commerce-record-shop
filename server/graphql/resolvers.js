@@ -20,6 +20,7 @@ const resolvers = {
         recordsByOldestToNewest: async() =>  recordService.getAllRecordsInDescByYear(),
         recordsByNewestToOldest: async() => recordService.getAllRecordsInAscByYear(),
         newsletterEmails: async() => newsletterService.getAllEmailsThatRequestedNewsletter(),
+        getThreeNewestRecords: async() => recordService.getThreeNewestRecords()
     },
     Mutation: {
         createNewsletterEmail: (_, {email}) => {

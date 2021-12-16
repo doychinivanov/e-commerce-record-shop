@@ -1,9 +1,17 @@
 // import { height } from '@mui/system';
+import { useQuery } from '@apollo/client';
+import { GET_NEWEST_RECORD_FOR_CAROUSEL } from '../../graphql/queries';
 import Carousel from 'react-material-ui-carousel'
 
 import CarouselItem from './CarouselItem';
 
 const CarouselConveyer = ({theme}) => {
+
+    const {data, loading} = useQuery(GET_NEWEST_RECORD_FOR_CAROUSEL);
+
+    console.log(data?.getThreeNewestRecords);
+
+    if(loading) return null;
 
     const items = [
         {
@@ -35,7 +43,7 @@ const CarouselConveyer = ({theme}) => {
             }}
             >
                 {
-                    items.map((item, i) => <CarouselItem key={i} item={item} theme={theme} />)
+                    data?.getThreeNewestRecords.map(item => <CarouselItem key={item._id} item={item} theme={theme} />)
                 }
             </Carousel>
         </div>

@@ -73,3 +73,13 @@ export const GET_USER_CART = gql`
  } 
 }
 `;
+
+export const GET_NEWEST_RECORD_FOR_CAROUSEL = gql`
+    query {
+        getThreeNewestRecords {
+        _id
+        imageUrl
+        creatorArtist
+    }
+}
+`;

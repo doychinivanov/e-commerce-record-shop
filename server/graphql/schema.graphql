@@ -6,6 +6,7 @@ type Query {
     recordsByOldestToNewest: [Record]
     recordsByNewestToOldest: [Record]
     record(id: ID!): Record
+    getThreeNewestRecords: [Record]
     newsletterEmails: [NewsletterEmail]
 }
 

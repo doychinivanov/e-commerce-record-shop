@@ -20,6 +20,10 @@ const getRecordById = (recordId) => {
     return RecordSchema.findById(recordId);
 }
 
+const getThreeNewestRecords = () => {
+    return RecordSchema.find({}).sort({'year': 'desc'}).limit(3);
+}
+
 const getAllRecordsInDescByYear = () => {
     return RecordSchema.find({}).sort({'year': 'desc'});
 }
@@ -43,5 +47,6 @@ export default {
     getAllRecordsInAscByYear,
     createNewRecord,
     deleteRecord,
-    updateRecord
+    updateRecord,
+    getThreeNewestRecords
 };
