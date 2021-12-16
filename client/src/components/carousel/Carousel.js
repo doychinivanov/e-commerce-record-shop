@@ -9,24 +9,7 @@ const CarouselConveyer = ({theme}) => {
 
     const {data, loading} = useQuery(GET_NEWEST_RECORD_FOR_CAROUSEL);
 
-    console.log(data?.getThreeNewestRecords);
-
     if(loading) return null;
-
-    const items = [
-        {
-            name: "Billie-Eilish",
-            imageUrl: "https://billieeilish.it/wp-content/uploads/2021/04/Billie-Eilish-Nuovo-Album.png"
-        },
-        {
-            name: "Little-Simz",
-            imageUrl: "https://trackblasters.com/wp-content/uploads/2021/09/Little-Simz-Sometimes-I-Might-Be-Introvert-Album-Stream_featured_image.jpg"
-        },
-        {
-            name: "Olivi Rodrigo",
-            imageUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcelebmix.com%2Fwp-content%2Fuploads%2F2021%2F05%2FOlivia-Rodrigo-Sour-Album-Artwork-billboard-1548-1621271558-768x433-1.jpg&f=1&nofb=1"
-        }
-    ]
 
     return (
         <div style={{marginTop: 64, textAlign: 'center', backgroundColor: theme.palette.background.primary}}>

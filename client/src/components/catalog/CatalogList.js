@@ -51,6 +51,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
             <div style={{ 'paddingTop': 90, 'paddingBottom': 90, backgroundColor: theme.palette.background.primary }}>
                 <Container fixed>
                     <Grid container spacing={{ xs: 2, md: 2, lg: 2, xl: 2 }} columns={{ xs: 2, sm: 8, md: 12, lg: 12, xl: 8 }}>
+                        {userRole === 'admin' ? <CatalogAddNewCard theme={theme} /> : null}
 
                         {loading || error
                             ?
@@ -84,9 +85,6 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                                 refetchData={() => refetch()}
                             />)
                         }
-
-                        {userRole === 'admin' ? <CatalogAddNewCard theme={theme} /> : null}
-
                     </Grid >
                 </Container>
             </div>

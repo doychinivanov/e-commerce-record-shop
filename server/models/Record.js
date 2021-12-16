@@ -5,7 +5,6 @@ const RecordSchema = new Schema({
     year: {
         type: Number,
         required: [true, 'Please enter a release date for this record!'],
-        unique: true,
     },
     name: {
         type: String,

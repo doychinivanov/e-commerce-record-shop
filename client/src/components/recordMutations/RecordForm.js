@@ -276,7 +276,7 @@ const RecordForm = ({ mutationFunction, recordInfo, type }) => {
           </FormControl>
         </span>
 
-        <Button onClick={submitCreateForm} sx={{ mt: 5 }}>
+        <Button disabled={isLoading} onClick={submitCreateForm} sx={{ mt: 5 }}>
           <span style={{ color: "#f5f5f5" }}>{type === 'edit' ? 'Edit Record' : 'Create Record'}</span>
         </Button>
       </FormControl>
