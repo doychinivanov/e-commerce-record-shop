@@ -11,6 +11,8 @@ const CarouselConveyer = ({theme}) => {
 
     if(loading) return null;
 
+    if(!loading) console.log(data?.getThreeNewestRecords)
+
     return (
         <div style={{marginTop: 64, textAlign: 'center', backgroundColor: theme.palette.background.primary}}>
             <h1 style={{paddingTop: 15, paddingBottom: 10, color: theme.palette.text.secondary}}>
