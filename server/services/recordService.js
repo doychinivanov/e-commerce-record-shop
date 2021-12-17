@@ -1,13 +1,19 @@
 import RecordSchema from '../models/Record.js';
 
-const getAllRecords = async (desiredCategory, query) => {
-    if(desiredCategory === 'all' && !query) return RecordSchema.find({});
+const getAllRecords = async (desiredCategory, query, pageNumber) => {
+    let result = [];
 
-    if(desiredCategory === 'all' && query) return RecordSchema.find({$or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
+    if(desiredCategory === 'all' && !query) {
+        result = await RecordSchema.find({});
+    } else if(desiredCategory === 'all' && query) {
+        result = await RecordSchema.find({$or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
+    } else if(desiredCategory !== 'all' && query) {
+        result = await RecordSchema.find({category: desiredCategory, $or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
+    } else if(desiredCategory !== 'all' && !query) {
+        result = await RecordSchema.find({category: desiredCategory});
+    }
 
-    if(desiredCategory !== 'all' && query) return RecordSchema.find({category: desiredCategory, $or: [{name: { $regex : new RegExp(query, "i") }}, {creatorArtist: { $regex : new RegExp(query, "i") }}]});
-
-    if(desiredCategory !== 'all' && !query) return RecordSchema.find({category: desiredCategory});
+    return result.splice((pageNumber - 1) * 10, 10);
 }
 
 const createNewRecord = (recordData) => {

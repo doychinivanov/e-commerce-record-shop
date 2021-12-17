@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "@apollo/client";
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -16,18 +16,25 @@ import Filter from "../searchFilter/Filter";
 const CatalogList = ({ theme, user, searchQuery }) => {
     const { userRole } = useAuth();
 
+    const [records, setRecords] = useState([]);
+    const [customLoading, setCustomLoading] = useState(true);
+
     const [category, setCategory] = useState('all');
     const [sortType, setSortType] = useState('');
 
-    const { loading, error, data, refetch  } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery } });
+    const [pageNumber, setPageNumber] = useState(1);
+    const [hasMore, setHasMore] = useState(false);
 
-    const handleCategoryChange = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const handleSortChange = (event) => {
-        setSortType(event.target.value);
-    };
+    const { loading, error, data, refetch  } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery, pageNumber } });
+    
+    useEffect(() => {
+        setCustomLoading(true);
+        if(!loading) {
+            setRecords(prevRecords => [...prevRecords, ...data.records]);
+            setHasMore(data.records.length !== 0);
+        }
+        setCustomLoading(false);
+    }, [data, loading]);
 
     if (!loading) {
         if (sortType === 'oldest') {
@@ -40,6 +47,28 @@ const CatalogList = ({ theme, user, searchQuery }) => {
             data.records.sort((record1, record2) => record2.price - record1.price);
         }
     }
+    
+    const observer = useRef();
+    const lastElementRef = useCallback(node => {
+        if(loading) return;
+        if(observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting && hasMore) {
+                setPageNumber(previousPageNum => previousPageNum + 1);
+            };
+        });
+
+        if (node) observer.current.observe(node);
+    }, [loading, hasMore]);
+
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+    };
+
+    const handleSortChange = (event) => {
+        setSortType(event.target.value);
+    };
 
     if (error) {
         toast.error(error.message);
@@ -53,7 +82,19 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                     <Grid container spacing={{ xs: 2, md: 2, lg: 2, xl: 2 }} columns={{ xs: 2, sm: 8, md: 12, lg: 12, xl: 8 }}>
                         {userRole === 'admin' ? <CatalogAddNewCard theme={theme} /> : null}
 
-                        {loading || error
+                        {
+                            records.map((record, index) => (<CatalogCard
+                            reference={records.length === index + 1 ? lastElementRef : undefined}
+                            key={record._id}
+                            theme={theme}
+                            record={record}
+                            userId={user?._id}
+                            userRole={userRole}
+                            userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
+                            refetchData={() => refetch()} />))
+                        }
+
+                        {loading || error || customLoading
                             ?
                             <>
                                 <Grid item xs={2} sm={4} md={3}>
@@ -73,17 +114,10 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                                         <Skeleton variant="rectangular" width={280} height={280} />
                                     </Box>
                                 </Grid>
+                                
                             </>
                             :
-                            data.records.map(record => <CatalogCard
-                                key={record._id}
-                                theme={theme}
-                                record={record}
-                                userId={user?._id}
-                                userRole={userRole}
-                                userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
-                                refetchData={() => refetch()}
-                            />)
+                            null
                         }
                     </Grid >
                 </Container>

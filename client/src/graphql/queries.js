@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 
 export const GET_ALL_RECORDS_FOR_LANDIN_GPAGE = gql`
-    query GetRecordsForLanding($category: String!, $query: String) {
-        records(category: $category, query: $query) {
+    query GetRecordsForLanding($category: String!, $query: String, $pageNumber: Int!) {
+        records(category: $category, query: $query, pageNumber: $pageNumber) {
             category
             imageUrl
             _id
