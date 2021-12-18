@@ -25,7 +25,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
     const [pageNumber, setPageNumber] = useState(1);
     const [hasMore, setHasMore] = useState(false);
 
-    const { loading, error, data, refetch  } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery, pageNumber } });
+    const { loading, error, data  } = useQuery(GET_ALL_RECORDS_FOR_LANDIN_GPAGE, { variables: { category, query: searchQuery, pageNumber } });
     
     useEffect(() => {
         setCustomLoading(true);
@@ -77,6 +77,10 @@ const CatalogList = ({ theme, user, searchQuery }) => {
         setSortType(event.target.value);
     };
 
+    const updateStateAfterDeleting = (recordId) => {
+        setRecords(records.filter(x => x._id !== recordId));
+    }
+
     if (error) {
         toast.error(error.message);
     }
@@ -98,7 +102,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                             userId={user?._id}
                             userRole={userRole}
                             userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
-                            refetchData={() => refetch()} />))
+                            refetchData={() => updateStateAfterDeleting(record._id)} />))
                         }
 
                         {loading || error || customLoading

@@ -6,7 +6,6 @@ import { getUserToken } from "../../api/apiUtils";
 import { DELETE_RECORD } from "../../graphql/mutations";
 
 const DeleteConfirmationModal = ({ open, handleClose, theme, productId, refetchData }) => {
-
   const backgroundColor =
     theme.palette.mode === "dark"
       ? theme.palette.background.primary
