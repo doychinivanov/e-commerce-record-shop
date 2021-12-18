@@ -101,7 +101,7 @@ const CatalogList = ({ theme, user, searchQuery }) => {
                             record={record}
                             userId={user?._id}
                             userRole={userRole}
-                            userHasThisRecord={user?.favorites.find(x => x._id === record._id)}
+                            userHasThisRecord={user?.favorites?.find(x => x._id === record._id)}
                             refetchData={() => updateStateAfterDeleting(record._id)} />))
                         }
 

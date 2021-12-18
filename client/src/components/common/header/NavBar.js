@@ -38,10 +38,6 @@ const NavBar = ({ theme, user, authModal, turnModalOn, turnModalOff }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -81,6 +77,7 @@ const NavBar = ({ theme, user, authModal, turnModalOn, turnModalOff }) => {
       handleMobileMenuClose={handleMobileMenuClose}
       handleProfileMenuOpen={handleProfileMenuOpen}
       mobileMenuId={mobileMenuId}
+      user={user}
     />
   );
 

@@ -1,13 +1,18 @@
+import { Link } from "react-router-dom";
+
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ThemeSwitcher from './ThemeSwitcher';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-const MobileDropDown = ({ mobileMoreAnchorEl, isMobileMenuOpen, handleMobileMenuClose, handleProfileMenuOpen, mobileMenuId }) => {
+import { red } from '@mui/material/colors';
+
+const MobileDropDown = ({user, mobileMoreAnchorEl, isMobileMenuOpen, handleMobileMenuClose, handleProfileMenuOpen, mobileMenuId }) => {
     return (
         <Menu
             anchorEl={mobileMoreAnchorEl}
@@ -25,30 +30,45 @@ const MobileDropDown = ({ mobileMoreAnchorEl, isMobileMenuOpen, handleMobileMenu
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
+            <MenuItem sx={{width: '100%'}}>
                 <ThemeSwitcher />
             </MenuItem>
-            <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge color="error">
+
+            <Link to="/favorites">
+            <MenuItem sx={{width: '100%'}}>
+            {user?.favorites?.length > 0 ? (
+                <IconButton size="large">
+                    <Badge >
+                        <FavoriteIcon style={{ color: red[500] }} />
+                    </Badge>
+                </IconButton>
+                ) : (
+                <IconButton size="large" color="inherit">
+                    <Badge>
                         <FavoriteBorderIcon />
                     </Badge>
                 </IconButton>
+            )}
                 <p>Favorites</p>
             </MenuItem>
-            <MenuItem>
+            </Link>
+
+            <Link to="/cart">
+            <MenuItem sx={{width: '100%'}}>
                 <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
                     color="inherit"
                 >
-                    <Badge badgeContent={4} color="error">
+                    <Badge badgeContent={user?.cart?.reduce((acc, cur) => acc + cur.quantity,0)} color="error">
                         <ShoppingCartOutlinedIcon />
                     </Badge>
                 </IconButton>
                 <p>Cart</p>
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
+            </Link>
+
+            <MenuItem onClick={handleProfileMenuOpen} sx={{width: '100%'}}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"

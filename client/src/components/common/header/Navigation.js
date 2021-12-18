@@ -15,7 +15,7 @@ const Navigation = ({ user, menuId, handleProfileMenuOpen, classes }) => {
     <Box sx={{ display: { xs: "none", md: "flex" } }}>
       <div className={classes.myComponent}>
         <Link to="/favorites">
-          {user.favorites.length > 0 ? (
+          {user?.favorites?.length > 0 ? (
             <IconButton size="large">
               <Badge >
                 <FavoriteIcon style={{ color: red[500] }} />
@@ -33,7 +33,7 @@ const Navigation = ({ user, menuId, handleProfileMenuOpen, classes }) => {
         <Link to="/cart">
           <IconButton size="large" color="inherit">
             <Badge
-              badgeContent={user.cart.reduce(
+              badgeContent={user?.cart?.reduce(
                 (acc, cur) => acc + cur.quantity,
                 0
               )}

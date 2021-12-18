@@ -37,7 +37,6 @@ const CartItem = ({ item, theme, userId, adjustQty, removeItemFromCart }) => {
 
         deleteCartItem({ variables: { cartItem: item._id, }, context: { headers: { 'x-authorization': idToken } } })
         .then(({data}) => {
-            console.log(data.deleteItemFromCart)
             removeItemFromCart(data.deleteItemFromCart._id);
         })
         .catch(err => toast.error('Failed to update quantity'));
