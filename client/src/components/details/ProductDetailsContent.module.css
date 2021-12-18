@@ -1,5 +1,12 @@
+.info-wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
 .record-img {
     width: 75%;
+    height: 85%;
+    /* width: 86%; */
 }
 
 .author{
@@ -17,4 +24,11 @@
 
 .record-description{
     line-height: 22px;
+}
+
+@media only screen and (max-width: 901px) {
+    .info-wrapper{
+        flex-direction: column;
+        text-align: center;
+    }
 }

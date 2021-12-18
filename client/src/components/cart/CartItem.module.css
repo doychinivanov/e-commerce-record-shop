@@ -40,3 +40,33 @@
     display: flex;
     justify-content: space-around;
 }
+
+.quantity-content ~ input {
+    width: 3rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.price-info {
+    margin-right: 2rem;
+    width: 10%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .cart-item-record-info h4 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .btn-content, .quantity-content, .cart-item-record-info h4 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .cart-item-record-info, .price-content {
+        display: none;
+    }
+}

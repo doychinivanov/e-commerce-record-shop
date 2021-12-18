@@ -16,12 +16,12 @@ const Cart = ({ theme,  cart, userId }) => {
 
                         {cart?.length > 0
                         ?  cart?.map(item => <CartItem key={item._id} item={item} theme={theme} userId={userId} />)
-                        : <h1>This is a empty Cart</h1>
+                        : <h1>This is an empty Cart</h1>
                         }
 
                     </Box>
 
-                    <h1>Total Price: {cart.reduce((acc, curr) => acc + (curr?.quantity * curr?.record?.price), 0)}</h1>
+                    <h1>Total Price: {cart.reduce((acc, curr) => acc + (curr?.quantity * curr?.record?.price), 0).toFixed(2)}</h1>
             </Container>
         </div>
     )

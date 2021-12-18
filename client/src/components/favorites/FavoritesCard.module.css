@@ -25,3 +25,38 @@
 .button-holder{
     margin-right: 0.7rem;
 }
+
+@media only screen and (max-width: 650px) {
+    .card-container{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .record-img{
+        width: 50%
+    }
+
+    .btn-content{
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .record-img {
+        width: 22%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .record-img {
+        width: 40%;
+    }
+
+    .btn-content{
+        display: none;
+    }
+
+}

@@ -73,7 +73,7 @@ const FavoritesCard = ({ recordData, userId, theme, updateUserFavorites, addToCa
                     </Link>
                 </span>
 
-                <span onClick={removeRecord} className={styles['button-holder']}>
+                <span onClick={removeRecord} className={[styles['button-holder']]}>
                     <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                         <span style={{ color: buttonColor, display: 'flex' }}>
                             <DeleteIcon />

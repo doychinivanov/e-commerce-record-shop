@@ -40,7 +40,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
     }
     
     return (
-        <>
+        <div className={styles['info-wrapper']}>
             <Grid item xs={4} sm={4} md={4}>
                 <img className={styles['record-img']} src={data.record.imageUrl} alt="record cover" />
             </Grid>
@@ -86,7 +86,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                     }
                 </span>
             </Grid>
-        </>
+        </div>
     )
 }
 

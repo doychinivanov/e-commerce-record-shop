@@ -64,7 +64,10 @@ const CartItem = ({ item, theme, userId, adjustQty, removeItemFromCart }) => {
 
             <div className={styles['cart-item-details']}>
                 <span>
-                    Quantity: 
+                    <span className={styles['quantity-content']}>
+                        Quantity: 
+                    </span>
+
                     <input
                     onChange={(ev) => {
                         const currentVal = Number(ev.target.value);
@@ -78,10 +81,12 @@ const CartItem = ({ item, theme, userId, adjustQty, removeItemFromCart }) => {
                     min="1"
                     type="number" />
                 </span>
-
-
-                <span>Price: {item.record.price}</span>
             </div>
+
+            <span className={styles['price-info']}>
+                <span className={styles['price-content']}>Price: </span>
+                {item.record.price}€
+            </span>
 
             <span onClick={deleteItemFromCart} className={styles['button-holder']}>
                 <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
