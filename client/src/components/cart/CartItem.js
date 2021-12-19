@@ -71,6 +71,7 @@ const CartItem = ({ item, theme, userId, adjustQty, removeItemFromCart }) => {
                     <input
                     onChange={(ev) => {
                         const currentVal = Number(ev.target.value);
+                        if(currentVal <= 0 || currentVal % 1 !== 0 || currentVal > 15) return toast.info('Quantity can be an integer between 1 and 15');
 
                         setCurrentQty(currentVal);
                         adjustQty(item._id, currentVal);

@@ -1,6 +1,6 @@
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-
+import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import { useAuth } from '../../../contexts/AuthCtx';
 import { removeUserFromState } from '../../../redux/user/user-actions';
@@ -32,8 +32,8 @@ const DekstopDropDown = ({anchorEl, menuId, isMenuOpen, handleMenuClose, removeU
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem sx={{width: '100%'}} onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem sx={{width: '100%'}} onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem sx={{width: '100%'}} onClick={() => {handleMenuClose(); toast.info('I am still in progress')}}>Profile</MenuItem>
+        <MenuItem sx={{width: '100%'}} onClick={() => {handleMenuClose(); toast.info('I am still in progress')}}>My account</MenuItem>
         <MenuItem sx={{width: '100%'}} onClick={onLogout}>Logout</MenuItem>
       </Menu>
     );

@@ -1,6 +1,7 @@
-# Vinyled Client
+# Vinyled Client -> <a href="https://vinyled-266bb.web.app/" > Open Vinyled </a>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 # General info
 Vinyled is a SPA application. It provides both customer experience - browsing and purchasing music records, and admin experience - UI for maintaining an online shop.

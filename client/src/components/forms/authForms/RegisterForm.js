@@ -59,7 +59,7 @@ const RegisterForm = ({ closeModal, classes, addUserToState }) => {
             setWrongPassowrd(true);
             setWrongRePass(true);
             toast.error('Password must be at least 8 characters.');
-            toast.error('Containing at least one number and one special char.');
+            toast.error('Containing at least one number, one letter and one special char.');
 
             return false;
         }

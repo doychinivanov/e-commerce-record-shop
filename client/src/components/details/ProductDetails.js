@@ -17,7 +17,7 @@ const ProductDetails = ({ id, theme }) => {
     }
 
     return (
-        <div style={{ 'paddingTop': 90, 'paddingBottom': 90, backgroundColor: theme.palette.background.primary, color: textColor }}>
+        <div style={{ 'paddingTop': 90, 'paddingBottom': 90, 'minHeight': '100vh', backgroundColor: theme.palette.background.primary, color: textColor }}>
             <Container fixed>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} columns={{ xs: 4, sm: 4, md: 8 }} alignItems="center">
