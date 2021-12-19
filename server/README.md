@@ -1,7 +1,7 @@
 # Graphql Apollo Server (Express)
 
 ## Generic info
-This is not a REST service, so there are no endpoints. The client fetches the needed data with a query. Some requests require a certain autorization. Authorization happens with firebase.
+This is not a REST service, so there are no endpoints. The client fetches the needed data with a query. Some requests require a certain authorization. The authorization happens with firebase.
 
 
 ## Data Structure

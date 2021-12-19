@@ -42,3 +42,8 @@ Vinyled is a prototype of an online record shop. The application supports two au
 <a href="https://github.com/doychinivanov/e-commerce-record-shop/tree/master/client" > Client Documentation </a>
 
 <a href="https://github.com/doychinivanov/e-commerce-record-shop/tree/master/server" > Server Documentation </a>
+
+# Installation
+All dependencies are listed in the package.json files. To run the project you must simply install all dependencies of the client and of the server.
+
+Everyone is free to fork the repo, only keep in mind that the .env files for both the server and the client are gitignored, so some errors will occure when you start the project.
