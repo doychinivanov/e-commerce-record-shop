@@ -4,6 +4,17 @@
 This is not a REST service, so there are no endpoints. The client fetches the needed data with a query. Some requests require a certain authorization. The authorization happens with firebase.
 
 
+## Technologies
+* graphql
+* apollo-server-core
+* apollo-server-express
+* express
+* mongoose
+* firebase-admin
+* cors
+* dotenv
+
+
 ## Data Structure
 ### Collections
 * users
@@ -47,3 +58,9 @@ This is not a REST service, so there are no endpoints. The client fetches the ne
     email: String,
 }
 ```
+
+# For more detailed information:
+
+<a href="https://github.com/doychinivanov/e-commerce-record-shop/tree/master/client" > Client Documentation </a>
+
+<a href="https://github.com/doychinivanov/e-commerce-record-shop" > Genral Information </a>
