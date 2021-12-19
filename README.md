@@ -33,6 +33,12 @@ Vinyled is a prototype of an online record shop. The application supports two au
     ! IMPORTANT
     If you want to test the admin funcionallity
     use the following credentials:
-    
+
     email: superadmin@abv.bg
     password: 123456s.
+
+# For more detailed information:
+
+<a href="https://github.com/doychinivanov/e-commerce-record-shop/tree/master/client" > Client Documentation </a>
+
+<a href="https://github.com/doychinivanov/e-commerce-record-shop/tree/master/server" > Server Documentation </a>
