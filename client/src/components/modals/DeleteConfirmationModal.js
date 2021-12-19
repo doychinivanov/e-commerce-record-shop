@@ -1,11 +1,12 @@
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { Button, Box, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 
 import { getUserToken } from "../../api/apiUtils";
 import { DELETE_RECORD } from "../../graphql/mutations";
 
-const DeleteConfirmationModal = ({ open, handleClose, theme, productId, refetchData }) => {
+const DeleteConfirmationModal = ({ open, handleClose, theme, productId, refetchData, toRedirect }) => {
   const backgroundColor =
     theme.palette.mode === "dark"
       ? theme.palette.background.primary
@@ -29,6 +30,7 @@ const DeleteConfirmationModal = ({ open, handleClose, theme, productId, refetchD
     textAlign: "center",
   };
 
+  const navigate = useNavigate();
   const [deleteRecordMutation, { error }] = useMutation(DELETE_RECORD);
 
   const deleteRecordHanlder = async () => {
@@ -37,7 +39,12 @@ const DeleteConfirmationModal = ({ open, handleClose, theme, productId, refetchD
         deleteRecordMutation({variables: {recordId: productId}, context: { headers: { 'x-authorization': idToken } }})
         .then(() => {
             handleClose();
-            refetchData();
+
+            if (toRedirect) {
+              navigate(`/`);
+            } else {
+              refetchData();
+            }
         })
         .catch((err) => toast.error(err.message))
   }

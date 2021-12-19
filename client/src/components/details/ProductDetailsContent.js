@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
@@ -12,6 +13,7 @@ import { turnModalOn } from '../../redux/authModal/modal-actions';
 import { ADD_ITEM_TO_CART } from '../../graphql/mutations';
 import { getUserToken } from '../../api/apiUtils';
 
+import DeleteConfirmationModal from '../modals/DeleteConfirmationModal';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Grid, Button } from "@mui/material";
 
@@ -20,6 +22,12 @@ import styles from './ProductDetailsContent.module.css';
 const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn }) => {
     const { userRole } = useAuth();
     const buttonColor = theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.background.secondary;
+
+    const [deleteModalIsOpen, setDeleteModal] = useState(false);
+  
+    const closeModal = useCallback(() => {
+      setDeleteModal(false);
+  }, []);
 
     const [mutateCart, {}] = useMutation(ADD_ITEM_TO_CART);
 
@@ -63,7 +71,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                         </span>
                     </Button>
 
-                    {userRole
+                    {userRole === 'admin' 
                     ? 
                     <>
                     <Link style={{marginLeft: 15, marginRight: 15}} to={`/edit/${data.record._id}`}>
@@ -75,7 +83,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                         </Button>
                     </Link>
 
-                    <Button variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
+                    <Button onClick={() => setDeleteModal(true)} variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                         <span style={{ color: buttonColor, display: 'flex' }}>
                             <DeleteOutlineOutlinedIcon />
                             <span style={{ color: buttonColor }} className={styles['btn-content']}>Delete</span>
@@ -86,6 +94,9 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                     }
                 </span>
             </Grid>
+
+            <DeleteConfirmationModal open={deleteModalIsOpen} handleClose={closeModal} theme={theme} productId={data.record._id} toRedirect={true} />
+
         </div>
     )
 }
