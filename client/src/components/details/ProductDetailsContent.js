@@ -62,7 +62,7 @@ const ProductDetailsContent = ({theme, data, addToCartInState, user, turnModalOn
                 <p className={styles['record-description']}>{data.record.description}</p>
 
                 <span>
-                    <h3>Price: {data.record.price}$</h3>
+                    <h3>Price: {data.record.price}€</h3>
 
                     <Button onClick={addToCart} variant={theme.palette.mode === 'dark' ? "outlined" : "contained"}>
                         <span style={{ color: buttonColor, display: 'flex' }}>
