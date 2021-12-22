@@ -15,9 +15,9 @@ const CategoryDropDown = ({category, handleCategoryChange, variant, error}) =>{
               onChange={handleCategoryChange}
               error={error}
             >
-              <MenuItem sx={{ width: "100%" }} value="none">
+              {/* <MenuItem sx={{ width: "100%" }} value="none">
                 {' '}
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem sx={{ width: "100%" }} value="all">
                 All
               </MenuItem>

@@ -14,6 +14,8 @@ const Form = ({ closeModal, type, textColor }) => {
           },
           "& .MuiFormControl-root": {
             color: textColor
+          }, "& .MuiFormHelperText-root": {
+            color: textColor
           }
         }
       });

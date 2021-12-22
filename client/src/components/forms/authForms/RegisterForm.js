@@ -12,6 +12,7 @@ import { validateEmail, validateName, validatePassword } from '../../../utils/in
 import { getUserToken } from '../../../api/apiUtils';
 
 const RegisterForm = ({ closeModal, classes, addUserToState }) => {
+
     const { signUpToFirebase } = useAuth();
 
     const [email, setEmail] = useState(undefined);

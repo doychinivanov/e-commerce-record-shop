@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
@@ -35,7 +35,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -46,13 +45,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBar = ({ classes }) => {
+
   const [searchParams, setSearchParams] = useSearchParams({});
   const [query, setQuery] = useState('');
 
   const searchRecord = (ev) => {
     ev.which = ev.which || ev.keyCode;
 
-    if (ev.which === 13 && query.trim() !== '') {
+    if (ev.which === 13 && query.trim() !== '' && query.trim() !== '?') {
       setSearchParams({ query });
     }
   }

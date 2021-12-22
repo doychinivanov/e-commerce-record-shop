@@ -12,7 +12,7 @@ const FavoritesList = ({ favorites, userId, theme }) => {
                 <Box sx={{ flexGrow: 1 }}>
                     {favorites.length > 0
                         ? favorites.map(record => <FavoritesCard key={record._id} userId={userId} recordData={record} theme={theme} />)
-                        : <h1>You have no favorites records yet.</h1>
+                        : <h1>You have no favorite records yet.</h1>
                     }
                 </Box>
             </Container>
